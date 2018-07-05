@@ -12,6 +12,7 @@ public class Tir {
     BufferedImage moshak;
     private boolean die=false;
     private double i=0;
+    private Tank sorce;
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib) {
         this.locX = locX;
         this.locY = locY;
@@ -26,6 +27,14 @@ public class Tir {
             e.printStackTrace();
         }
     }
+    public Tir(int locX, int locY, double deltaY, double deltaX, double shib,Tank sorce){
+        this(locX,locY,deltaY,deltaX,shib);
+        this.sorce=sorce;
+    }
+
+    public Tank getSorce() {
+        return sorce;
+    }
 
     public void update() {
         i++;
@@ -38,7 +47,6 @@ public class Tir {
         }
         if(i>20000){
             die=true;
-
         }
 
     }

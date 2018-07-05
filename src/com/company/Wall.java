@@ -12,6 +12,7 @@ public class Wall {
     private int health;
     private int locX;
     private int locY;
+    private final int firstX,firstY;
     private BufferedImage moshak;
     private boolean die;
     public Wall(){
@@ -22,6 +23,8 @@ public class Wall {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        firstY=0;
+        firstX=0;
     }
     public Wall(int locX,int locY){
         this.locX = locX;
@@ -32,6 +35,16 @@ public class Wall {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        firstX=locX;
+        firstY=locY;
+    }
+
+    public int getFirstX() {
+        return firstX;
+    }
+
+    public int getFirstY() {
+        return firstY;
     }
 
     public boolean isDie() {
