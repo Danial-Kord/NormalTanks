@@ -9,38 +9,20 @@ import java.io.File;
 import java.io.IOException;
 
 public class Wall {
-    private int health;
-    private int locX;
-    private int locY;
-    private final int firstX,firstY;
-    private BufferedImage moshak,moshak2,moshak3;
-    private boolean die;
-    private String kind;
-    public Wall(int locX,int locY,String kind){
+    protected int health;
+    protected int locX;
+    protected int locY;
+    protected final int firstX,firstY;
+    protected BufferedImage moshak;
+    protected boolean die;
+    public Wall(int locX,int locY){
         this.locX = locX;
         this.locY = locY;
-        this.kind = kind;
         health = 3;
-        try {
-            if(kind.equals("softWall")) {
-                moshak = ImageIO.read(new File("Src//softWall.png"));
-                moshak2 = ImageIO.read(new File("Src//softWall2.png"));
-                moshak3 = ImageIO.read(new File("Src//softWall3.png"));
-            }
-            if(kind.equals("hardWall"))
-                moshak = ImageIO.read(new File("Src//hardWall.png"));
-            if(kind.equals("teazel"))
-                moshak = ImageIO.read(new File("Src//teazel.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         firstX=locX;
         firstY=locY;
     }
 
-    public String getKind() {
-        return kind;
-    }
 
     public int getFirstX() {
         return firstX;
@@ -59,10 +41,6 @@ public class Wall {
 
     public void setHealth(int health) {
         this.health = health;
-        if(health==2)
-            moshak = moshak2;
-        if(health == 1)
-            moshak = moshak3;
         if(health<=0)
             die=true;
     }

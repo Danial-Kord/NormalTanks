@@ -186,7 +186,10 @@ public class GameFrame extends JFrame {
                     , state.getWalls().get(i).getLocY(), null);
 
         }
-
+        for(int i=0;i<state.getGrasses().size();i++){
+            g2d.drawImage(state.getGrasses().get(i).getGrass(), state.getGrasses().get(i).getX()
+                    , state.getGrasses().get(i).getY(), null);
+        }
 
         // Print FPS info
         long currentRender = System.currentTimeMillis();
@@ -273,12 +276,7 @@ public class GameFrame extends JFrame {
         g2d.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         for(int i=0;i<30;i++)
             for (int j=0;j<20;j++) {
-
                     g2d.drawImage(soili, (int) 85*i, (int) 91*j, this);
-//                    g2d.drawImage(ImageIO.read(soil), 500, 500, this);
-//            g2d.drawImage(ImageIO.read(soil), 0, 500, this);
-//            g2d.drawImage(ImageIO.read(soil), 500, 0, this);
-
             }
     }
 

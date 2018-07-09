@@ -20,10 +20,12 @@ public class GameState {
     private ArrayList<Tir> tirs;
     private ArrayList<Tank>tanks;
     private ArrayList<Wall>walls;
+    private ArrayList<Grass>grasses;
     public GameState() {
         //
         // Initialize the game state and all elements ...
         //
+        grasses=new ArrayList<Grass>();
         walls = new ArrayList<Wall>();
         tank = new TankHuman( 1200, 800);
         tirs = new ArrayList<Tir>();
@@ -37,81 +39,89 @@ public class GameState {
     private void mapCreator(){
 
         tanks.add(new TankAi( 300, 100, 100,10,1000000));
-        tanks.add(new StaticTank( 100, 2800));
+        tanks.add(new StaticTank( 100, 2800,1000000));
         for (int i=0;i<20;i++)
-            walls.add(new Wall(0,-520+100*i,"softWall"));
+            walls.add(new SoftWall(0,-520+100*i));
         for (int i=0;i<40;i++)
-            walls.add(new Wall(-500+100*i,520,"teazel"));
-        walls.add(new Wall(900,900,"hardWall"));
+            walls.add(new Teazel(-500+100*i,520));
+        walls.add(new HardWall(900,900));
         for (int i = 0; i < 20; i++) {
-            walls.add(new Wall(0 + 100 * i, 0, "hardWall"));
+            walls.add(new HardWall(0 + 100 * i, 0));
         }
 //        walls.add(new Wall(120,120,"teazel"));
         for (int i = 0; i < 30; i++) {
-            walls.add(new Wall(0, 100 * i, "hardWall"));
+            walls.add(new HardWall(0, 100 * i));
         }
         for (int i = 0; i < 30; i++) {
-            walls.add(new Wall(2000, 100 * i, "hardWall"));
+            walls.add(new HardWall(2000, 100 * i));
         }
         for (int i = 0; i < 21; i++) {
-            walls.add(new Wall(100 * i, 3000, "hardWall"));
+            walls.add(new HardWall(100 * i, 3000));
         }
         for (int i = 0; i < 5; i++) {
-            walls.add(new Wall(600, 100 + 100 * i, "hardWall"));
+            walls.add(new HardWall(600, 100 + 100 * i));
         }
         for (int i = 0; i < 5; i++) {
             for (int j = 2; j < 5; j++) {
-                walls.add(new Wall(100 + 100 * i, 100 + j * 100, "softWall"));
+                walls.add(new SoftWall(100 + 100 * i, 100 + j * 100));
             }
         }
-        walls.add(new Wall(100, 2600, "teazel"));
-        walls.add(new Wall(200, 2600, "teazel"));
-        walls.add(new Wall(300, 2600, "teazel"));
-        walls.add(new Wall(300, 2700, "teazel"));
-        walls.add(new Wall(300, 2800, "teazel"));
-        walls.add(new Wall(300, 2900, "teazel"));
-//        for (int i = 0; i < 5; i++) {
-//            walls.add(new Wall(1600 + 100 * i, 2500, "hardWall"));
-//        }
-//        for (int i = 0; i < 4; i++) {
-//            walls.add(new Wall(1700 + 100 * i, 2400, "hardWall"));
-//        }
-//        for (int i = 0; i < 3; i++) {
-//            walls.add(new Wall(1800 + 100 * i, 2300, "hardWall"));
-//        }
-//        for (int i = 0; i < 2; i++) {
-//            walls.add(new Wall(1900 + 100 * i, 2200, "hardWall"));
-//        }
-        for (int i = 0; i < 4; i++) {
-            walls.add(new Wall(1000 + 100 * i, 2500, "teazel"));
+        walls.add(new Teazel(100, 2600));
+        walls.add(new Teazel(200, 2600));
+        walls.add(new Teazel(300, 2600));
+        walls.add(new Teazel(300, 2700));
+        walls.add(new Teazel(300, 2800));
+        walls.add(new Teazel(300, 2900));
+        for (int i = 0; i < 5; i++) {
+            walls.add(new HardWall(1600 + 100 * i, 2500));
         }
-        walls.add(new Wall(1600, 2700, "softWall"));
-        walls.add(new Wall(1600, 2800, "softWall"));
-        walls.add(new Wall(1600, 2900, "softWall"));
-        walls.add(new Wall(1600, 2600, "softWall"));
-        walls.add(new Wall(800, 1600, "hardWall"));
-        walls.add(new Wall(900, 1600, "hardWall"));
-        walls.add(new Wall(1000, 1600, "hardWall"));
-        walls.add(new Wall(1100, 1600, "hardWall"));
-        walls.add(new Wall(900, 1700, "hardWall"));
-        walls.add(new Wall(1000, 1700, "hardWall"));
-        walls.add(new Wall(300, 600, "teazel"));
-        walls.add(new Wall(400, 600, "teazel"));
-        walls.add(new Wall(500, 600, "teazel"));
-        walls.add(new Wall(600, 600, "teazel"));
-//        for (int i = 0; i < 9; i++) {
-//            walls.add(new Wall(100 + 100 * i, 2500, "hardWall"));
-//        }
-//        for(int i=0;i<9;i++){
-//            walls.add(new Wall(100+100*i,900,"hardWall"));
-//        }
-//        for(int i=0;i<5;i++){
-//            walls.add(new Wall(100+100*8,900-100*i,"hardWall"));
-//        }
+        for (int i = 0; i < 4; i++) {
+            walls.add(new HardWall(1700 + 100 * i, 2400));
+        }
+        for (int i = 0; i < 3; i++) {
+            walls.add(new HardWall(1800 + 100 * i, 2300));
+        }
+        for (int i = 0; i < 2; i++) {
+            walls.add(new HardWall(1900 + 100 * i, 2200));
+        }
+        for (int i = 0; i < 4; i++) {
+            walls.add(new Teazel(1000 + 100 * i, 2500));
+        }
+        walls.add(new SoftWall(1600, 2700));
+        walls.add(new SoftWall(1600, 2800));
+        walls.add(new SoftWall(1600, 2900));
+        walls.add(new SoftWall(1600, 2600));
+        walls.add(new HardWall(800, 1600));
+        walls.add(new HardWall(900, 1600));
+        walls.add(new HardWall(1000, 1600));
+        walls.add(new HardWall(1100, 1600));
+        walls.add(new HardWall(900, 1700));
+        walls.add(new HardWall(1000, 1700));
+        walls.add(new Teazel(300, 600));
+        walls.add(new Teazel(400, 600));
+        walls.add(new Teazel(500, 600));
+        walls.add(new Teazel(600, 600));
+        for (int i = 0; i < 9; i++) {
+            walls.add(new HardWall(100 + 100 * i, 2500));
+        }
+        for(int i=0;i<9;i++){
+            walls.add(new HardWall(100+100*i,900));
+        }
+        for(int i=0;i<5;i++){
+            walls.add(new HardWall(100+100*8,900-100*i));
+        }
         for(int i=0;i<4;i++){
-            walls.add(new Wall(100+100*8,400-100*i,"softWall"));
+            walls.add(new SoftWall(100+100*8,400-100*i));
+        }
+        for (int i=0;i<3;i++){
+            grasses.add(new Grass(100*(i+10),800));
         }
     }
+
+    public ArrayList<Grass> getGrasses() {
+        return grasses;
+    }
+
     public void update() {
         //
         // Update the state of all game elements
@@ -147,6 +157,10 @@ public class GameState {
         for (int i=0;i<tirs.size();i++){
             tirs.get(i).setLocX(tirs.get(i).getFirstX()-tirs.get(i).getTankDeltaX());
             tirs.get(i).setLocY(tirs.get(i).getFirstY()-tirs.get(i).getTankDeltaY());
+        }
+        for(int i=0;i<grasses.size();i++){
+            grasses.get(i).setX(grasses.get(i).getFirstX()-tank.getDeltaX());
+            grasses.get(i).setY(grasses.get(i).getFirstY()-tank.getDeltaY());
         }
         System.out.println(tank.locX+".................." + tank.locY);
 //        System.out.println(tank.locX +".........."+tank.locY);
@@ -252,9 +266,9 @@ public class GameState {
                     if(flags)
                         break;
                     if (Math.pow(walls.get(j).getLocX() + 50 - tirs.get(i).getLocX() - 63, 2) + Math.pow(walls.get(j).getLocY() + 50 - tirs.get(i).getLocY() - 29, 2) <3025) {
-                        if(walls.get(j).getKind().equals("softWall"))
+                        if(walls.get(j) instanceof SoftWall)
                         walls.get(j).setHealth(walls.get(j).getHealth() - 1);
-                        if(!walls.get(j).getKind().equals("teazel"))
+                        if(!(walls.get(j) instanceof Teazel))
                         tirs.get(i).setDie(true);
                         flag=true;
 //                        for (int k = 0; k < 100; k++) {
