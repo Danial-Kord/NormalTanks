@@ -2,31 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="056f5d54-a117-428e-a8b7-3250ef860492" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/company/Grass.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/company/MovableTank.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/company/StaticTank.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/company/TankAi.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/company/TankHuman.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameFrame.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameFrame.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameLoop.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameLoop.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameState.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameState.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tank$1.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tank$Action.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tank$KeyHandler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tank$MouseHandler.class" afterPath="" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tank.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tank.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tir.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tir.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/Wall.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/Wall.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/companys/Main$1.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/companys/Main$1.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/companys/Main.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/companys/Main.class" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/GameFrame.java" afterPath="$PROJECT_DIR$/src/com/company/GameFrame.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/GameState.java" afterPath="$PROJECT_DIR$/src/com/company/GameState.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/NerdGirl.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Tank.java" afterPath="$PROJECT_DIR$/src/com/company/Tank.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Tir.java" afterPath="$PROJECT_DIR$/src/com/company/Tir.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Wall.java" afterPath="$PROJECT_DIR$/src/com/company/Wall.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -480,7 +464,7 @@
       <workItem from="1530948716563" duration="74000" />
       <workItem from="1531028875434" duration="5336000" />
       <workItem from="1531080646178" duration="6329000" />
-      <workItem from="1531133123808" duration="9231000" />
+      <workItem from="1531133123808" duration="9272000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1530621519503</created>
@@ -496,15 +480,21 @@
       <option name="project" value="LOCAL" />
       <updated>1530818174118</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Initial commit">
+      <created>1531150831058</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1531150831058</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97950000" />
+    <option name="totallyTimeSpent" value="97991000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
