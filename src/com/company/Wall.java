@@ -13,30 +13,33 @@ public class Wall {
     private int locX;
     private int locY;
     private final int firstX,firstY;
-    private BufferedImage moshak;
+    private BufferedImage moshak,moshak2,moshak3;
     private boolean die;
-    public Wall(){
-        health = 3;
-        die = false;
-        try {
-            moshak = ImageIO.read(new File("Src//softWall.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        firstY=0;
-        firstX=0;
-    }
-    public Wall(int locX,int locY){
+    private String kind;
+    public Wall(int locX,int locY,String kind){
         this.locX = locX;
         this.locY = locY;
+        this.kind = kind;
         health = 3;
         try {
-            moshak = ImageIO.read(new File("Src//softWall.png"));
+            if(kind.equals("softWall")) {
+                moshak = ImageIO.read(new File("Src//softWall.png"));
+                moshak2 = ImageIO.read(new File("Src//softWall2.png"));
+                moshak3 = ImageIO.read(new File("Src//softWall3.png"));
+            }
+            if(kind.equals("hardWall"))
+                moshak = ImageIO.read(new File("Src//hardWall.png"));
+            if(kind.equals("teazel"))
+                moshak = ImageIO.read(new File("Src//teazel.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         firstX=locX;
         firstY=locY;
+    }
+
+    public String getKind() {
+        return kind;
     }
 
     public int getFirstX() {
@@ -46,7 +49,6 @@ public class Wall {
     public int getFirstY() {
         return firstY;
     }
-
     public boolean isDie() {
         return die;
     }
@@ -57,6 +59,12 @@ public class Wall {
 
     public void setHealth(int health) {
         this.health = health;
+        if(health==2)
+            moshak = moshak2;
+        if(health == 1)
+            moshak = moshak3;
+        if(health<=0)
+            die=true;
     }
 
     public void setLocX(int locX) {

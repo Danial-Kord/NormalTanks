@@ -8,17 +8,25 @@ import java.io.IOException;
 public class Tir {
     private int locX, locY;
     private double delytaY, deltaX;
+    private int tankDeltaX,tankDeltaY;
+    private  int firstTankX,firstTankY;
     private double shib;
     BufferedImage moshak;
     private boolean die=false;
     private double i=0;
     private Tank sorce;
+    private int firstX,firstY;
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib) {
         this.locX = locX;
         this.locY = locY;
+        firstX=locX;
+        firstY=locY;
+        tankDeltaX=0;
+        tankDeltaY=0;
         this.deltaX = deltaX;
         this.delytaY = deltaY;
-
+        this. deltaX =this.deltaX/Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2))*5;
+        this.delytaY =this.delytaY/Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2))*5;
         this.shib = shib;
 
         try {
@@ -30,29 +38,75 @@ public class Tir {
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib,Tank sorce){
         this(locX,locY,deltaY,deltaX,shib);
         this.sorce=sorce;
+        sorce.minusBullet();
     }
+    public Tir(int locX, int locY, double deltaY, double deltaX, double shib,Tank sorce,int firstTankX,int firstTankY){
+        this(locX,locY,deltaY,deltaX,shib,sorce);
+        this.firstTankX = firstTankX;
+        this.firstTankY = firstTankY;
 
+    }
     public Tank getSorce() {
         return sorce;
     }
 
+    public int getFirstTankY() {
+        return firstTankY;
+    }
+
+    public int getFirstTankX() {
+        return firstTankX;
+    }
+
     public void update() {
         i++;
-        locX += deltaX / 40;
-        locY += delytaY / 40;
-        if(i%50 == 0) {
+        firstX += deltaX;
+        firstY += delytaY;
+//        if(i%50 == 0) {
 //            System.out.println("loc x :" + locX + "   deltax" + deltaX);
 //            System.out.println("loc y :" + locY + "   deltay" + delytaY);
 //            System.out.println("............................");
-        }
+//        }
         if(i>20000){
             die=true;
         }
 
     }
 
+    public void setTankDeltaX(int tankDeltaX) {
+        this.tankDeltaX = tankDeltaX;
+    }
+
+    public void setTankDeltaY(int tankDeltaY) {
+        this.tankDeltaY = tankDeltaY;
+    }
+
+    public int getTankDeltaX() {
+        return tankDeltaX;
+    }
+
+    public int getTankDeltaY() {
+        return tankDeltaY;
+    }
+
+    public int getFirstY() {
+        return firstY;
+    }
+
+    public int getFirstX() {
+        return firstX;
+    }
+
     public boolean isDie() {
         return die;
+    }
+
+    public void setLocY(int locY) {
+        this.locY = locY;
+    }
+
+    public void setLocX(int locX) {
+        this.locX = locX;
     }
 
     public BufferedImage getMoshak() {
