@@ -187,9 +187,16 @@ public class GameFrame extends JFrame {
 
         }
         for(int i=0;i<state.getGrasses().size();i++){
-            g2d.drawImage(state.getGrasses().get(i).getGrass(), state.getGrasses().get(i).getX()
-                    , state.getGrasses().get(i).getY(), null);
+            g2d.drawImage(state.getGrasses().get(i).getGrass(), state.getGrasses().get(i).getLocX()
+                    , state.getGrasses().get(i).getLocY(), null);
         }
+
+        for (int i = 0; i < state.getPrizes().size(); i++) {
+            if (state.getPrizes().get(i).getVisible()) {
+                g2d.drawImage(state.getPrizes().get(i).image, state.getPrizes().get(i).getLocX(), state.getPrizes().get(i).getLocY(), this);
+            }
+        }
+
 
         // Print FPS info
         long currentRender = System.currentTimeMillis();

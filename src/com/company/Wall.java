@@ -8,29 +8,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Wall {
+public class Wall extends Building{
     protected int health;
-    protected int locX;
-    protected int locY;
-    protected final int firstX,firstY;
     protected BufferedImage moshak;
     protected boolean die;
     public Wall(int locX,int locY){
-        this.locX = locX;
-        this.locY = locY;
+        super(locX,locY);
         health = 3;
-        firstX=locX;
-        firstY=locY;
     }
 
-
-    public int getFirstX() {
-        return firstX;
-    }
-
-    public int getFirstY() {
-        return firstY;
-    }
     public boolean isDie() {
         return die;
     }
@@ -45,29 +31,12 @@ public class Wall {
             die=true;
     }
 
-    public void setLocX(int locX) {
-        this.locX = locX;
-    }
-
-    public void setLocY(int locY) {
-        this.locY = locY;
-    }
     public void setMoshak(BufferedImage moshak) {
         this.moshak = moshak;
     }
-
-    public int getLocX() {
-        return locX;
-    }
-
-    public int getLocY() {
-        return locY;
-    }
-
     public int getHealth() {
         return health;
     }
-
     public BufferedImage getMoshak() {
         return moshak;
     }

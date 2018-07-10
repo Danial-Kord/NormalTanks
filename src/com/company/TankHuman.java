@@ -1,7 +1,10 @@
 package com.company;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -55,7 +58,7 @@ public class TankHuman extends MovableTank{
         return mouseRealised;
     }
     public void update(ArrayList<Wall> walls, ArrayList<Tank>tanks) {
-
+        super.update(walls,tanks);
         up =false;
         down=false;
         left=false;
@@ -198,16 +201,35 @@ public class TankHuman extends MovableTank{
 
         @Override
         public void mousePressed(MouseEvent e) {
-//            if(e.getButton()==1)//TODO
-            ////////////////////////////////////////////////////////////////////////////////
-            mouseX = e.getX();
-            mouseY = e.getY();
-            mousePress = true;
+            if (e.getButton() == 3){
+
+                if(stateHeavyGun==true){
+                    stateHeavyGun=false;
+                    try {
+                        looleh= ImageIO.read(new File("Src//Images//tankGun02.png"));
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                else {
+                    stateHeavyGun=true;
+                    try {
+                        looleh= ImageIO.read(new File("Src//looleh.png"));
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }else{
+                mouseX = e.getX();
+                mouseY = e.getY();
+                mousePress = true;
+            }
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
             mousePress = false;
+            if(e.getButton() != 3)
             mouseRealised = true;
             mouseX = e.getX();
             mouseY = e.getY();

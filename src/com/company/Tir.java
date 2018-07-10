@@ -17,10 +17,15 @@ public class Tir {
     private Tank sorce;
     private int firstX,firstY;
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib) {
-        this.locX = locX;
-        this.locY = locY;
-        firstX=locX;
-        firstY=locY;
+        try {
+            moshak = ImageIO.read(new File("Src//bom11.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.locX = locX-moshak.getWidth()/2;
+        this.locY = locY-moshak.getHeight()/2;
+        firstX=this.locX;
+        firstY=this.locY;
         tankDeltaX=0;
         tankDeltaY=0;
         this.deltaX = deltaX;
@@ -29,11 +34,6 @@ public class Tir {
         this.delytaY =this.delytaY/Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2))*5;
         this.shib = shib;
 
-        try {
-            moshak = ImageIO.read(new File("Src//bom11.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib,Tank sorce){
         this(locX,locY,deltaY,deltaX,shib);

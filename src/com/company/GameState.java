@@ -21,16 +21,34 @@ public class GameState {
     private ArrayList<Tank>tanks;
     private ArrayList<Wall>walls;
     private ArrayList<Grass>grasses;
+    private ArrayList<Prizes> prizes = new ArrayList<>();
+    private ArrayList<Building>buildings;
+    public ArrayList<Prizes> getPrizes() {
+        return prizes;
+    }
     public GameState() {
         //
         // Initialize the game state and all elements ...
         //
+        buildings = new ArrayList<Building>();
         grasses=new ArrayList<Grass>();
         walls = new ArrayList<Wall>();
         tank = new TankHuman( 1200, 800);
         tirs = new ArrayList<Tir>();
         tanks = new ArrayList<Tank>();
-    mapCreator();
+        prizes.add(new Canonshells(1400,860));
+        prizes.add(new Machingun(1400,890));
+        prizes.add(new Repair(1400,940));
+        prizes.add(new Star(1400,960));
+        mapCreator();
+
+ /////////////////////////////////
+        for (int i=0;i<walls.size();i++)
+            buildings.add(walls.get(i));
+        for (int i=0;i<prizes.size();i++)
+            buildings.add(prizes.get(i));
+        for (int i=0;i<grasses.size();i++)
+            buildings.add(grasses.get(i));
     }
 
     /**
@@ -133,7 +151,9 @@ public class GameState {
         removingTrash();
         BuildingNewBullet();
         bulletHit();
-
+        for(int i=0;i<prizes.size();i++){
+            prizes.get(i).task(tank);
+        }
     }
 
     public ArrayList<Tank> getTanks() {
@@ -146,29 +166,45 @@ public class GameState {
         return tirs;
     }
     public void mapMoving(){
-        for (int i=0;i<walls.size();i++){
-            walls.get(i).setLocX(walls.get(i).getFirstX()-tank.getDeltaX());
-            walls.get(i).setLocY(walls.get(i).getFirstY()-tank.getDeltaY());
+        for (int i=0;i<tirs.size();i++){
+            tirs.get(i).setLocX(tirs.get(i).getFirstX()-tirs.get(i).getTankDeltaX());
+            tirs.get(i).setLocY(tirs.get(i).getFirstY()-tirs.get(i).getTankDeltaY());
         }
         for (int i=0;i<tanks.size();i++){
             tanks.get(i).locX=tanks.get(i).firstX-tank.getDeltaX();
             tanks.get(i).locY=tanks.get(i).firstY-tank.getDeltaY();
         }
-        for (int i=0;i<tirs.size();i++){
-            tirs.get(i).setLocX(tirs.get(i).getFirstX()-tirs.get(i).getTankDeltaX());
-            tirs.get(i).setLocY(tirs.get(i).getFirstY()-tirs.get(i).getTankDeltaY());
+
+//        for (int i=0;i<buildings.size();i++){
+//            buildings.get(i).setLocX(buildings.get(i).getFirstX()-tank.getDeltaX());
+//            buildings.get(i).setLocY(buildings.get(i).getFirstY()-tank.getDeltaY());
+//        }
+        tank.getRectangle().setLocation(tank.getLocX(),tank.getLocY());
+                for (int i=0;i<walls.size();i++){
+            walls.get(i).setLocX(walls.get(i).getFirstX()-tank.getDeltaX());
+            walls.get(i).setLocY(walls.get(i).getFirstY()-tank.getDeltaY());
         }
         for(int i=0;i<grasses.size();i++){
-            grasses.get(i).setX(grasses.get(i).getFirstX()-tank.getDeltaX());
-            grasses.get(i).setY(grasses.get(i).getFirstY()-tank.getDeltaY());
+            grasses.get(i).setLocX(grasses.get(i).getFirstX()-tank.getDeltaX());
+            grasses.get(i).setLocY(grasses.get(i).getFirstY()-tank.getDeltaY());
         }
-        System.out.println(tank.locX+".................." + tank.locY);
+        for (int i=0;i<prizes.size();i++){
+            prizes.get(i).setLocX(prizes.get(i).getFirstX() - tank.getDeltaX());
+            prizes.get(i).setLocY(prizes.get(i).getFirstY() - tank.getDeltaY());
+            prizes.get(i).rectangle.setLocation(prizes.get(i).getLocX(),prizes.get(i).getLocY());
+        }
+
 //        System.out.println(tank.locX +".........."+tank.locY);
     }
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
     public void BuildingNewBullet(){
         if(tank.isMouseRealised()){
-            double rotationRequired = Math.atan((double) (tank.getMouseY() - tank.locY-100)/
-                    (double) Math.abs((tank).getMouseX() - tank.locX-100));
+            double rotationRequired = Math.atan((double) (tank.getMouseY() - tank.locY-100+25)/
+                    (double) Math.abs(tank.getMouseX() - tank.locX-100+25));
             if((tank).getMouseX() - tank.locX-100 < 0 && tank.getMouseY() - tank.locY-100 > 0){
                 rotationRequired = Math.PI - rotationRequired;
             }
@@ -316,6 +352,7 @@ public class GameState {
             if(tank.isDead())
                 iterator2.remove();
         }
+
     }
     public TankHuman getTank() {
         return tank;

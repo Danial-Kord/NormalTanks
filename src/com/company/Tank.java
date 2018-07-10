@@ -32,8 +32,18 @@ public class Tank {
     protected boolean dead;
     protected int count=0;
     protected boolean up,down,left,right;
-    public Tank(int locX,int locY){
+    private Rectangle rectangle;
 
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    public Tank(int locX,int locY){
+        rectangle= new Rectangle(locX,locY,100,100);
         dead=false;
         right=false;
         left=false;
@@ -68,6 +78,7 @@ public class Tank {
     }
     public void update(ArrayList<Wall> walls, ArrayList<Tank>tanks){
         count++;
+
     }
     public int getRange() {
         return range;
