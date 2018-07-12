@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,18 +11,21 @@ public class Tir {
     private double delytaY, deltaX;
     private int tankDeltaX,tankDeltaY;
     private  int firstTankX,firstTankY;
+    private int speed;
     private double shib;
     BufferedImage moshak;
     private boolean die=false;
     private double i=0;
     private Tank sorce;
     private int firstX,firstY;
+    protected Rectangle rectangle;
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib) {
         try {
             moshak = ImageIO.read(new File("Src//bom11.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        rectangle = new Rectangle(locX,locY,moshak.getWidth(),moshak.getHeight());
         this.locX = locX-moshak.getWidth()/2;
         this.locY = locY-moshak.getHeight()/2;
         firstX=this.locX;
@@ -30,15 +34,23 @@ public class Tir {
         tankDeltaY=0;
         this.deltaX = deltaX;
         this.delytaY = deltaY;
-        this. deltaX =this.deltaX/Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2))*5;
-        this.delytaY =this.delytaY/Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2))*5;
+        this. deltaX =this.deltaX/Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2));
+        this.delytaY =this.delytaY/Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2));
         this.shib = shib;
 
     }
-    public Tir(int locX, int locY, double deltaY, double deltaX, double shib,Tank sorce){
+    public Tir(int locX, int locY, double deltaY, double deltaX, double shib, Tank sorce){
         this(locX,locY,deltaY,deltaX,shib);
         this.sorce=sorce;
-        sorce.minusBullet();
+        sorce.minus();
+        ////
+        if(sorce instanceof TankHuman) {
+            TankHuman temp = (TankHuman)sorce;
+            speed = temp.getTirSpeed();
+        }
+        else
+            speed=20;
+        ////////
     }
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib,Tank sorce,int firstTankX,int firstTankY){
         this(locX,locY,deltaY,deltaX,shib,sorce);
@@ -46,6 +58,11 @@ public class Tir {
         this.firstTankY = firstTankY;
 
     }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
     public Tank getSorce() {
         return sorce;
     }
@@ -60,8 +77,8 @@ public class Tir {
 
     public void update() {
         i++;
-        firstX += deltaX;
-        firstY += delytaY;
+        firstX += deltaX*speed;
+        firstY += delytaY*speed;
 //        if(i%50 == 0) {
 //            System.out.println("loc x :" + locX + "   deltax" + deltaX);
 //            System.out.println("loc y :" + locY + "   deltay" + delytaY);

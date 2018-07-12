@@ -9,20 +9,35 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class TankHuman extends MovableTank{
-    private boolean mousePress,mouseRealised;
 
+    private boolean mousePress,mouseRealised;
     public boolean gameOver;
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
     private boolean stop;
+    ////////////////
+    private int tirSpeed;
+    private boolean pause;
+    /////////////////////
     public TankHuman(int locX,int locY){
         super(locX,locY);
+        pause=false;
         gameOver = false;
         mousePress = false;
         keyHandler = new KeyHandler();
         mouseHandler = new MouseHandler();
         stop = false;
+        tirSpeed = 20;
     }
+
+    public void setTirSpeed(int tirSpeed) {
+        this.tirSpeed = tirSpeed;
+    }
+
+    public int getTirSpeed() {
+        return tirSpeed;
+    }
+
     public boolean isStop() {
         return stop;
     }
@@ -57,8 +72,8 @@ public class TankHuman extends MovableTank{
     public boolean isMouseRealised() {
         return mouseRealised;
     }
-    public void update(ArrayList<Wall> walls, ArrayList<Tank>tanks) {
-        super.update(walls,tanks);
+    public void update(ArrayList<Wall> walls) {
+        super.update(walls);
         up =false;
         down=false;
         left=false;
@@ -66,9 +81,9 @@ public class TankHuman extends MovableTank{
         if (keyUP ) {
             if(locY-1>80)
             locY -= 1;
-            deltaY+=-8;
-            if(check(walls,tanks,"down")) {
-                deltaY += 8;
+            deltaY+=-4;
+            if(check(walls,"down")) {
+                deltaY += 4;
                 if(locY-1>80)
                 locY += 1;
             }
@@ -76,9 +91,9 @@ public class TankHuman extends MovableTank{
         if (keyDOWN ) {
             if(locY+1<816)
             locY +=1;
-            deltaY+=8;
-            if(check(walls,tanks,"up")) {
-                deltaY += -8;
+            deltaY+=4;
+            if(check(walls,"up")) {
+                deltaY += -4;
                 if(locY+1<816)
                 locY -=1;
             }
@@ -86,9 +101,9 @@ public class TankHuman extends MovableTank{
         if (keyLEFT ) {
             if(locX-1>200)
             locX -= 1;
-            deltaX+=-8;
-            if(check(walls,tanks,"right")) {
-                deltaX += +8;
+            deltaX+=-4;
+            if(check(walls,"right")) {
+                deltaX += +4;
                 if(locX-1>200)
                 locX += 1;
             }
@@ -96,9 +111,9 @@ public class TankHuman extends MovableTank{
         if (keyRIGHT ) {
             if(locX+1<1400)
             locX += 1;
-            deltaX+=8;
-            if(check(walls,tanks,"left")) {
-                deltaX += -8;
+            deltaX+=4;
+            if(check(walls,"left")) {
+                deltaX += -4;
                 if(locX+1<1400)
                 locX -= 1;
             }
@@ -140,6 +155,16 @@ public class TankHuman extends MovableTank{
 //        left=false;
 //        right=false;
     }
+//    public boolean check(ArrayList<Wall>walls,ArrayList<Tank>tanks,String jahat){
+//        if(super.check(walls,jahat))
+//        {
+//
+//        }
+////            if (Math.pow(x1 + 50 - this.getLocX() - this.getTank().getWidth() / 2, 2) + Math.pow(y1 + 50
+////                    - this.getLocY() - this.getTank().getHeight() / 2, 2) < 32000) {
+//        }
+//        return false;
+//    }
     @Override
     public void setHealth(int health) {
         super.setHealth(health);
@@ -166,9 +191,6 @@ public class TankHuman extends MovableTank{
                 case KeyEvent.VK_RIGHT:
                     keyRIGHT = true;
                     break;
-                case KeyEvent.VK_ESCAPE:
-                    gameOver = true;
-                    break;
             }
         }
 
@@ -188,10 +210,22 @@ public class TankHuman extends MovableTank{
                 case KeyEvent.VK_RIGHT:
                     keyRIGHT = false;
                     break;
-
+                    ///////////
+                case KeyEvent.VK_ESCAPE:
+                    pause = !pause;
+                    break;
+                    /////////////
             }
         }
 
+    }
+
+    public boolean isPause() {
+        return pause;
+    }
+
+    public void setPause(boolean pause) {
+        this.pause = pause;
     }
 
     /**

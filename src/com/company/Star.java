@@ -22,8 +22,10 @@ public class Star extends Prizes {
     public void task(Tank tank) {
         if (collision(tank)) {
             if (getVisible()) {
-                /////////////////////////////////سرعت رو باید اضافه کنیم اینجا
-                ////////////////////////////////////
+                if(tank instanceof TankHuman){
+                    TankHuman temp = (TankHuman)tank;
+                    temp.setTirSpeed(40);
+                }
                 setVisible(false);
             }
         } else {

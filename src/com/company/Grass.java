@@ -11,6 +11,7 @@ public class Grass extends Building{
         super(x,y);
         try {
             grass = ImageIO.read(new File("src\\Images\\plant.png"));
+            path = "plant";
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -18,7 +18,7 @@ public class Repair extends Prizes {
     public void task(Tank tank) {
         if (collision(tank)) {
             if (getVisible()) {
-                tank.setHealth(5);
+                tank.setHealth(tank.getHealth() + 500);
                 setVisible(false);
             }
         } else {

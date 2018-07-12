@@ -47,8 +47,8 @@ public class TankAi extends MovableTank{
         }
     }
 
-    public void update(ArrayList<Wall> walls, ArrayList<Tank>tanks) {
-    super.update(walls,tanks);
+    public void update(ArrayList<Wall> walls) {
+    super.update(walls);
 //        if(up && keyDOWN){
 //            locY-=1;
 //            deltaY+=-8;

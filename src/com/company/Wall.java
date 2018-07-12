@@ -12,9 +12,10 @@ public class Wall extends Building{
     protected int health;
     protected BufferedImage moshak;
     protected boolean die;
+    protected Rectangle rectangle;
     public Wall(int locX,int locY){
         super(locX,locY);
-        health = 3;
+        health = 300;
     }
 
     public boolean isDie() {
@@ -29,6 +30,10 @@ public class Wall extends Building{
         this.health = health;
         if(health<=0)
             die=true;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
     public void setMoshak(BufferedImage moshak) {

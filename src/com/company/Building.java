@@ -1,8 +1,12 @@
 package com.company;
 
-public class Building {
+import java.awt.*;
+import java.io.Serializable;
+
+public class Building implements Serializable{
     protected int locX;
     protected int locY;
+    protected String path;
     protected final int firstX,firstY;
     public Building(int locX,int locY){
         this.locX = locX;

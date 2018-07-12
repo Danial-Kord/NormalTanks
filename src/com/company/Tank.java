@@ -12,83 +12,50 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends MilitaryTool{
     private int numberBullet=20;
     private int numberCheapBullet=5;
     public boolean stateHeavyGun=true;
-    private int health;
-    protected int locX, locY;
-    public int firstX,firstY;
-    protected int tirRange;
+
     public int locXLooleh,locYLooleh;
-
-
-    protected int deltaX,deltaY;
     protected int mouseX, mouseY;
+    protected BufferedImage looleh;
 
-    protected BufferedImage tank,looleh;
 
-    protected int range;
-    protected boolean dead;
-    protected int count=0;
     protected boolean up,down,left,right;
-    private Rectangle rectangle;
 
-    public Rectangle getRectangle() {
-        return rectangle;
-    }
 
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
-    }
+
 
     public Tank(int locX,int locY){
-        rectangle= new Rectangle(locX,locY,100,100);
+        super(locX,locY);
+        rectangle= new Rectangle(locX,locY,200,200);
         dead=false;
         right=false;
         left=false;
         up=false;
         down=false;
-        deltaX=0;
-        deltaY=0;
+
 //        BufferedImage in = ImageIO.read(img);
 
 //        tank = Toolkit.getDefaultToolkit().getImage("Src//icon.png");
-        health = 3;
-        this.locX = locX;
-        this.locY = locY;
-        firstX=locX;
-        firstY=locY;
+        health = 500;
         //
         //
         mouseX = 0;
         mouseY = 0;
         //
-
         locXLooleh = locX;
         locYLooleh = locY;
     }
     public Tank(int locX,int locY,int range){
-        this(locX,locY);
-        setRange(range);
+        super(locX,locY,range);
+
     }
 
-    public void setRange(int range) {
-        this.range = range;
-    }
-    public void update(ArrayList<Wall> walls, ArrayList<Tank>tanks){
+
+    public void update(ArrayList<Wall> walls,ArrayList<Tank>tanks){
         count++;
-
-    }
-    public int getRange() {
-        return range;
-    }
-
-
-    public void setHealth(int health) {
-        this.health = health;
-        if(health <= 0)
-            dead=true;
     }
 
     public boolean isDead() {
@@ -101,16 +68,6 @@ public class Tank {
 
     public BufferedImage getTank() {
         return tank;
-    }
-
-    public int getLocX() {
-        return locX;
-    }
-
-
-
-    public int getLocY() {
-        return locY;
     }
 
     public int getMouseX() {
@@ -162,6 +119,11 @@ public class Tank {
         this.left = left;
     }
 
+    @Override
+    public void update() {
+        count++;
+    }
+
     public void setRight(boolean right) {
         this.right = right;
     }
@@ -175,15 +137,14 @@ public class Tank {
         return count;
     }
 
-    public int getDeltaX() {
-        return deltaX;
-    }
-
-    public int getDeltaY() {
-        return deltaY;
-    }
     public void plusBullet(int number){
         numberBullet+=number;
+    }
+    public void minus(){
+        if(stateHeavyGun)
+            minusBullet();
+        else
+            minusCheapBullet();
     }
     public void minusBullet(){
         if(numberBullet>0)

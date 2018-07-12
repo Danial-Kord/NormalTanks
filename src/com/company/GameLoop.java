@@ -21,10 +21,11 @@ public class GameLoop implements Runnable {
      * Frame Per Second.
      * Higher is better, but any value above 24 is fine.
      */
-    public static final int FPS = 30;
+    public static final int FPS = 120;
 
-    private GameFrame canvas;
-    private GameState state;
+
+    private static GameFrame canvas;
+    private static GameState state;
 
     public GameLoop(GameFrame frame) {
         canvas = frame;
@@ -34,16 +35,40 @@ public class GameLoop implements Runnable {
      * This must be called before the game loop starts.
      */
     public void init() {
-        // Perform all initializations ...
         state = new GameState();
-        canvas.addKeyListener(state.getTank().getKeyListener());
-        canvas.addMouseListener(state.getTank().getMouseListener());
-        canvas.addMouseMotionListener(state.getTank().getMouseMotionListener());
+        // Perform all initializations ...
+        if(GameFrame.inMenu){
+            canvas.addMouseListener(state.getMouseListener());
+            canvas.addKeyListener(state.getKeyListener());
+        }
+        else {
+            canvas.addKeyListener(state.getTank().getKeyListener());
+            canvas.addMouseListener(state.getTank().getMouseListener());
+            canvas.addMouseMotionListener(state.getTank().getMouseMotionListener());
 //		canvas.addMouseListener(state.getTank().getMouseListener());
-    }
+        }
+        }
+
 
     @Override
     public void run() {
+        while (GameFrame.inMenu){
+            try {
+                long start = System.currentTimeMillis();
+                //
+                state.update();
+                canvas.render(state);
+                //
+                long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
+                if (delay > 0)
+                    Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+            }
+        }
+//        System.out.println("این جا مونده");
+        canvas.addKeyListener(state.getTank().getKeyListener());
+        canvas.addMouseListener(state.getTank().getMouseListener());
+        canvas.addMouseMotionListener(state.getTank().getMouseMotionListener());
         boolean gameOver = false;
         while (!gameOver) {
             try {
