@@ -89,12 +89,12 @@ public class TankHuman extends MovableTank{
             }
         }
         if (keyDOWN ) {
-            if(locY+1<816)
+            if(locY+1<700)
             locY +=1;
             deltaY+=4;
             if(check(walls,"up")) {
                 deltaY += -4;
-                if(locY+1<816)
+                if(locY+1<700)
                 locY -=1;
             }
         }

@@ -45,6 +45,7 @@ public class GameFrame extends JFrame {
     private BufferedImage soili;
     //بولین های مربوط به گویی
     private int num = 0;
+    private static boolean conected = false;
     public static Boolean loneWolfClick = false;
     public static Boolean start = false;
     public static Boolean join = false;
@@ -69,6 +70,8 @@ public class GameFrame extends JFrame {
     private static Image copperLight;
     private static Image silverLight;
     private static Image internetImage2;
+    private static Image cursour;
+    private static Image cursour2;
 
     public GameFrame(String title) {
         super(title);
@@ -132,8 +135,10 @@ public class GameFrame extends JFrame {
 
     private void doRendering(Graphics2D g2d, GameState state) {
 
+
         if(inMenu){
             guiSystem(g2d);
+            mouseController(g2d);
             return;
         }
         //
@@ -306,7 +311,7 @@ public class GameFrame extends JFrame {
         }
         //////////////////////////////////
         healthPaint(g2d,state);
-
+        mouseController(g2d);
     }
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -353,6 +358,8 @@ public class GameFrame extends JFrame {
      */
     private void setImage() {
         try {
+            cursour = ImageIO.read(new File("cursour\\download.png"));
+            cursour2 = ImageIO.read(new File("cursour\\cursour.png"));
             tank = ImageIO.read(new File("tank.jpg"));
             tank33 = ImageIO.read(new File("tank33.png"));
             starDark = ImageIO.read(new File("startdark.png"));
@@ -406,42 +413,49 @@ public class GameFrame extends JFrame {
         }
         //وقتی روی سرور کلیک میکنید
         if (serverClick) {
-            try {
-                g2d.drawImage(tank33, 0, 0, this);
-                g2d.drawImage(starDark, 10, 10, this);
-                g2d.drawImage(internetDark, 160, 10, this);
-                g2d.drawImage(serverNetworkDark, 330, 55, this);
-                num++;
-                String address = "wait animation\\";
-                address = address + (num % 8 + 1) + ".png";
-                Thread.sleep(70);
+            if(num==0)
+            new Server();
+            if(!conected) {
+                try {
+                    g2d.drawImage(tank33, 0, 0, this);
+                    g2d.drawImage(starDark, 10, 10, this);
+                    g2d.drawImage(internetDark, 160, 10, this);
+                    g2d.drawImage(serverNetworkDark, 330, 55, this);
+                    num++;
+                    String address = "wait animation\\";
+                    address = address + (num % 8 + 1) + ".png";
+                    Thread.sleep(70);
 //                System.out.println(address);
-                g2d.drawImage(ImageIO.read(new File(address)), 650, 55, this);
-                //یافتن ip
-                String ip = "";
-                try (final DatagramSocket socket = new DatagramSocket()) {
-                    try {
-                        socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
-                    } catch (UnknownHostException e) {
+                    g2d.drawImage(ImageIO.read(new File(address)), 650, 55, this);
+                    //یافتن ip
+                    String ip = "";
+                    try (final DatagramSocket socket = new DatagramSocket()) {
+                        try {
+                            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+                        } catch (UnknownHostException e) {
+                            e.printStackTrace();
+                        }
+                        ip = socket.getLocalAddress().getHostAddress();
+//                    System.out.println(ip);
+                    } catch (SocketException e) {
                         e.printStackTrace();
                     }
-                    ip = socket.getLocalAddress().getHostAddress();
-//                    System.out.println(ip);
-                } catch (SocketException e) {
+                    //نوشته ی توی صفحه
+                    String str = "Looking for teamate _ your IP is " + ip;
+                    g2d.setColor(Color.yellow);
+                    g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+                    int strWidth = g2d.getFontMetrics().stringWidth(str);
+                    g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2 + 50);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //نوشته ی توی صفحه
-                String str = "Looking for teamate _ your IP is " + ip;
-                g2d.setColor(Color.yellow);
-                g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
-                int strWidth = g2d.getFontMetrics().stringWidth(str);
-                g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2 + 50);
+            }
+            else {
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         } else {
             if (start) {
@@ -481,5 +495,24 @@ public class GameFrame extends JFrame {
         }
     }
 
+    public static void setConected(boolean conected) {
+        GameFrame.conected = conected;
+    }
+
+    public void mouseController(Graphics2D g2d) {
+        int mouseNowX = MouseInfo.getPointerInfo().getLocation().x;
+        int mouseNowY = MouseInfo.getPointerInfo().getLocation().y;
+        try {
+            if (inMenu) {
+                g2d.drawImage(cursour, mouseNowX - 70, mouseNowY - 10, this);
+            }
+            else {
+                g2d.drawImage(cursour2, mouseNowX - 120, mouseNowY - 50, this);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 /////////////////////////////////////////////////////////////////////////
 }

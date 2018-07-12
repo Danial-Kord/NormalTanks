@@ -5,7 +5,8 @@ import com.company.GameFrame;
 import com.company.GameLoop;
 import com.company.ThreadPool;
 
-import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 /**
@@ -23,7 +24,12 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                BufferedImage cursorImg = new BufferedImage(15,15,BufferedImage.TYPE_INT_ARGB);
+                Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg,new Point(0,0),"blank cursor");
+
+
                 GameFrame frame = new GameFrame("Game Title");
+                frame.getContentPane().setCursor(blankCursor);
                 frame.setLocationRelativeTo(null); // put frame at center of screen
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
