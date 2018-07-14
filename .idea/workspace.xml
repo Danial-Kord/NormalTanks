@@ -2,27 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="056f5d54-a117-428e-a8b7-3250ef860492" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/company/Speed.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameFrame.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameFrame.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameState.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/GameState.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tir.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/company/Tir.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/companys/Main$1.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/companys/Main$1.class" />
       <change beforePath="$PROJECT_DIR$/out/production/NormalTank/com/companys/Main.class" afterPath="$PROJECT_DIR$/out/production/NormalTank/com/companys/Main.class" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Canonshells.java" afterPath="$PROJECT_DIR$/src/com/company/Canonshells.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Changes.java" afterPath="$PROJECT_DIR$/src/com/company/Changes.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/GameFrame.java" afterPath="$PROJECT_DIR$/src/com/company/GameFrame.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/GameState.java" afterPath="$PROJECT_DIR$/src/com/company/GameState.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Machingun.java" afterPath="$PROJECT_DIR$/src/com/company/Machingun.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/MilitaryTool.java" afterPath="$PROJECT_DIR$/src/com/company/MilitaryTool.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/MovableTank.java" afterPath="$PROJECT_DIR$/src/com/company/MovableTank.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Server.java" afterPath="$PROJECT_DIR$/src/com/company/Server.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Soosk.java" afterPath="$PROJECT_DIR$/src/com/company/Soosk.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Star.java" afterPath="$PROJECT_DIR$/src/com/company/Star.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Tank.java" afterPath="$PROJECT_DIR$/src/com/company/Tank.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/TankAi.java" afterPath="$PROJECT_DIR$/src/com/company/TankAi.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/TankHuman.java" afterPath="$PROJECT_DIR$/src/com/company/TankHuman.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Tir.java" afterPath="$PROJECT_DIR$/src/com/company/Tir.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -564,7 +549,7 @@
       <workItem from="1531501704324" duration="12960000" />
       <workItem from="1531548629824" duration="195000" />
       <workItem from="1531548897401" duration="4745000" />
-      <workItem from="1531560650793" duration="18485000" />
+      <workItem from="1531560650793" duration="18515000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1530621519503</created>
@@ -629,11 +614,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531552224304</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="rize kari ha taghriban tamoomeh">
+      <created>1531579295430</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1531579295431</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224045000" />
+    <option name="totallyTimeSpent" value="224075000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -679,7 +671,8 @@
     <MESSAGE value="rectangle &amp; starting saving into file" />
     <MESSAGE value="starting server" />
     <MESSAGE value="server client impeoved very well" />
-    <option name="LAST_COMMIT_MESSAGE" value="server client impeoved very well" />
+    <MESSAGE value="rize kari ha taghriban tamoomeh" />
+    <option name="LAST_COMMIT_MESSAGE" value="rize kari ha taghriban tamoomeh" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
