@@ -14,6 +14,7 @@ public class Star extends Prizes {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        path="star";
     }
 
 

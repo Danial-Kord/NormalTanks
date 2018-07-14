@@ -7,11 +7,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Wall extends Building{
-    protected int health;
-    protected BufferedImage moshak;
-    protected boolean die;
+public class Wall extends Building implements Serializable {
+    protected transient BufferedImage moshak;
     protected Rectangle rectangle;
     public Wall(int locX,int locY){
         super(locX,locY);
@@ -26,11 +25,6 @@ public class Wall extends Building{
         this.die = die;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-        if(health<=0)
-            die=true;
-    }
 
     public Rectangle getRectangle() {
         return rectangle;

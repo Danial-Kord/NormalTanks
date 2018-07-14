@@ -5,10 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TankHuman extends MovableTank{
+public class TankHuman extends MovableTank implements Serializable {
 
     private boolean mousePress,mouseRealised;
     public boolean gameOver;
@@ -28,6 +29,7 @@ public class TankHuman extends MovableTank{
         mouseHandler = new MouseHandler();
         stop = false;
         tirSpeed = 20;
+        kind  = "TankHuman";
     }
 
     public void setTirSpeed(int tirSpeed) {
@@ -73,6 +75,7 @@ public class TankHuman extends MovableTank{
         return mouseRealised;
     }
     public void update(ArrayList<Wall> walls) {
+        
         super.update(walls);
         up =false;
         down=false;
@@ -81,9 +84,9 @@ public class TankHuman extends MovableTank{
         if (keyUP ) {
             if(locY-1>80)
             locY -= 1;
-            deltaY+=-4;
+            deltaY+=-2;
             if(check(walls,"down")) {
-                deltaY += 4;
+                deltaY += 2;
                 if(locY-1>80)
                 locY += 1;
             }
@@ -91,9 +94,9 @@ public class TankHuman extends MovableTank{
         if (keyDOWN ) {
             if(locY+1<700)
             locY +=1;
-            deltaY+=4;
+            deltaY+=2;
             if(check(walls,"up")) {
-                deltaY += -4;
+                deltaY += -2;
                 if(locY+1<700)
                 locY -=1;
             }
@@ -101,9 +104,9 @@ public class TankHuman extends MovableTank{
         if (keyLEFT ) {
             if(locX-1>200)
             locX -= 1;
-            deltaX+=-4;
+            deltaX+=-2;
             if(check(walls,"right")) {
-                deltaX += +4;
+                deltaX += +2;
                 if(locX-1>200)
                 locX += 1;
             }
@@ -111,9 +114,9 @@ public class TankHuman extends MovableTank{
         if (keyRIGHT ) {
             if(locX+1<1400)
             locX += 1;
-            deltaX+=4;
+            deltaX+=2;
             if(check(walls,"left")) {
-                deltaX += -4;
+                deltaX += -2;
                 if(locX+1<1400)
                 locX -= 1;
             }
@@ -168,8 +171,12 @@ public class TankHuman extends MovableTank{
     @Override
     public void setHealth(int health) {
         super.setHealth(health);
-        if(dead)
-            gameOver=true;
+        if(dead) {
+            gameOver = true;
+            SoundsHandeler.backGroundSoundStop();
+            SoundsHandeler.playSoundBackGround(new File("music\\death.wav").getAbsoluteFile());
+
+        }
     }
     public boolean isMousePress() {
         return mousePress;

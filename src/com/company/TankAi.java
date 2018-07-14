@@ -21,6 +21,7 @@ public class TankAi extends MovableTank{
         this.rangeX=range;
         this.rangeY=range;
         this.tirRange = tirRange;
+        kind = "TankAi";
     }
 
     @Override

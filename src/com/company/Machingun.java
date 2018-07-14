@@ -12,6 +12,7 @@ public class Machingun extends Prizes {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        path = "machingun";
     }
 
     @Override

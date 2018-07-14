@@ -12,6 +12,7 @@ public class Canonshells extends Prizes {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        path = "canonshells";
     }
 
     @Override

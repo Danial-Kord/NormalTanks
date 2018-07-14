@@ -1,8 +1,6 @@
 /*** In The Name of Allah ***/
 package com.company;
 
-import javafx.scene.shape.QuadCurve;
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -32,16 +30,16 @@ public class GameFrame extends JFrame {
 
     //این متغیر ها برای شیف پیدا کردن گویی و بازی هستند
     public static Boolean inMenu = true;
-
+    private static Server server;
     /////
     public static final int GAME_HEIGHT = 1000;                  // 720p game resolution
     public static final int GAME_WIDTH = 16 * GAME_HEIGHT / 9;  // wide aspect ratio
     private long lastRender;
     private ArrayList<Float> fpsHistory;
     private BufferStrategy bufferStrategy;
-    private static File photoHeavy = new File("src\\Images\\NumberOfHeavyBullet2.png");
-    private static File photoCheap = new File("src\\Images\\NumberOfMachinGun2.png");
-    private static File heart = new File("heart.png");
+    private static Image photoHeavy;
+    private static Image photoCheap;
+    private static Image heart;
     private BufferedImage soili;
     //بولین های مربوط به گویی
     private int num = 0;
@@ -49,12 +47,17 @@ public class GameFrame extends JFrame {
     public static Boolean loneWolfClick = false;
     public static Boolean start = false;
     public static Boolean join = false;
-    public static Boolean server = false;
+    public static Boolean serverImage = false;
     public static Boolean eseay = false;
     public static Boolean meduim = false;
     public static Boolean hard = false;
     public static Boolean serverClick = false;
+    public static boolean resumeGame = false;
     //عکس های نیو شده در گویی
+    private static Image resume;
+    private static Image resume1;
+    private static Image serverNetwork;
+    private static Image serverNetwork2;
     private static Image tank;
     private static Image tank33;
     private static Image starDark;
@@ -137,7 +140,7 @@ public class GameFrame extends JFrame {
 
 
         if(inMenu){
-            guiSystem(g2d);
+            guiSystem(g2d,state);
             mouseController(g2d);
             return;
         }
@@ -175,11 +178,19 @@ public class GameFrame extends JFrame {
         }
         j++;
 // Drawing the rotated image at the required drawing locations
-
+//        System.out.println("fsfsfsfsfs");
         //enemy tanks
         for (int i = 0; i < state.getMilitaryTools().size(); i++) {
-            double rotate = Math.atan((double) (state.getTank().locY - state.getMilitaryTools().get(i).locY) /
-                    (double) Math.abs(state.getTank().locX - state.getMilitaryTools().get(i).locX));
+
+            double rotate;
+            if(!state.isClient()) {
+                rotate = Math.atan((double) (state.getTank().locY - state.getMilitaryTools().get(i).locY) /
+                        (double) Math.abs(state.getTank().locX - state.getMilitaryTools().get(i).locX));
+                state.getMilitaryTools().get(i).setRotate(rotate);
+            }
+            else {
+                rotate = state.getMilitaryTools().get(i).getRotate();
+            }
             if (state.getTank().locX - state.getMilitaryTools().get(i).locX < 0 && state.getTank().locY - state.getMilitaryTools().get(i).locY > 0) {
                 rotate = Math.PI - rotate;
             }
@@ -206,26 +217,28 @@ public class GameFrame extends JFrame {
 //        if(!state.soosk.dead)
 //        g2d.drawImage(state.soosk.getImage(), state.soosk.getLocX(), state.soosk.getLocY(), null);
         if (!state.getTank().gameOver) {
-            if ((state.getTank().isKeyUP() && state.getTank().isKeyRIGHT()) || (state.getTank().isKeyDOWN() && state.getTank().isKeyLEFT())) {
-                double rotationRequired3 = -Math.PI / 4;
-                AffineTransform tx3 = AffineTransform.getRotateInstance(rotationRequired3, 100, 100);
-                AffineTransformOp op3 = new AffineTransformOp(tx3, AffineTransformOp.TYPE_BILINEAR);
-                g2d.drawImage(op3.filter(state.getTank().getTank(), null), state.getTank().locX, state.getTank().locY, null);
-            } else if ((state.getTank().isKeyUP() && state.getTank().isKeyLEFT()) || (state.getTank().isKeyDOWN() && state.getTank().isKeyRIGHT())) {
-                double rotationRequired3 = Math.PI / 4;
-                AffineTransform tx3 = AffineTransform.getRotateInstance(rotationRequired3, 100, 100);
-                AffineTransformOp op3 = new AffineTransformOp(tx3, AffineTransformOp.TYPE_BILINEAR);
-                g2d.drawImage(op3.filter(state.getTank().getTank(), null), state.getTank().locX, state.getTank().locY, null);
-            } else if (state.getTank().isKeyUP() || state.getTank().isKeyDOWN()) {
-                double rotationRequired3 = Math.PI / 2;
-                AffineTransform tx3 = AffineTransform.getRotateInstance(rotationRequired3, 100, 100);
-                AffineTransformOp op3 = new AffineTransformOp(tx3, AffineTransformOp.TYPE_BILINEAR);
-                g2d.drawImage(op3.filter(state.getTank().getTank(), null), state.getTank().locX, state.getTank().locY, null);
-            } else {
-                double rotationRequired3 = 0;
-                AffineTransform tx3 = AffineTransform.getRotateInstance(rotationRequired3, 100, 100);
-                AffineTransformOp op3 = new AffineTransformOp(tx3, AffineTransformOp.TYPE_BILINEAR);
-                g2d.drawImage(op3.filter(state.getTank().getTank(), null), state.getTank().locX, state.getTank().locY, null);
+            for (int i=0;i<state.getTankHumens().size();i++) {
+                if ((state.getTankHumens().get(i).isKeyUP() && state.getTankHumens().get(i).isKeyRIGHT()) || (state.getTankHumens().get(i).isKeyDOWN() && state.getTankHumens().get(i).isKeyLEFT())) {
+                    double rotationRequired3 = -Math.PI / 4;
+                    AffineTransform tx3 = AffineTransform.getRotateInstance(rotationRequired3, 100, 100);
+                    AffineTransformOp op3 = new AffineTransformOp(tx3, AffineTransformOp.TYPE_BILINEAR);
+                    g2d.drawImage(op3.filter(state.getTankHumens().get(i).getTank(), null), state.getTankHumens().get(i).locX, state.getTankHumens().get(i).locY, null);
+                } else if ((state.getTankHumens().get(i).isKeyUP() && state.getTankHumens().get(i).isKeyLEFT()) || (state.getTankHumens().get(i).isKeyDOWN() && state.getTankHumens().get(i).isKeyRIGHT())) {
+                    double rotationRequired3 = Math.PI / 4;
+                    AffineTransform tx3 = AffineTransform.getRotateInstance(rotationRequired3, 100, 100);
+                    AffineTransformOp op3 = new AffineTransformOp(tx3, AffineTransformOp.TYPE_BILINEAR);
+                    g2d.drawImage(op3.filter(state.getTankHumens().get(i).getTank(), null), state.getTankHumens().get(i).locX, state.getTankHumens().get(i).locY, null);
+                } else if (state.getTankHumens().get(i).isKeyUP() || state.getTankHumens().get(i).isKeyDOWN()) {
+                    double rotationRequired3 = Math.PI / 2;
+                    AffineTransform tx3 = AffineTransform.getRotateInstance(rotationRequired3, 100, 100);
+                    AffineTransformOp op3 = new AffineTransformOp(tx3, AffineTransformOp.TYPE_BILINEAR);
+                    g2d.drawImage(op3.filter(state.getTankHumens().get(i).getTank(), null), state.getTankHumens().get(i).locX, state.getTankHumens().get(i).locY, null);
+                } else {
+                    double rotationRequired3 = 0;
+                    AffineTransform tx3 = AffineTransform.getRotateInstance(rotationRequired3, 100, 100);
+                    AffineTransformOp op3 = new AffineTransformOp(tx3, AffineTransformOp.TYPE_BILINEAR);
+                    g2d.drawImage(op3.filter(state.getTankHumens().get(i).getTank(), null), state.getTankHumens().get(i).locX, state.getTankHumens().get(i).locY, null);
+                }
             }
         }
         for (int i = 0; i < state.getTirs().size(); i++) {
@@ -265,7 +278,12 @@ public class GameFrame extends JFrame {
                 avg += fps;
             }
             avg /= fpsHistory.size();
-            String str = String.format("Average FPS = %.1f , Last Interval = %d ms",
+            String str= "";
+            if(state.isClient())
+                str="CLIENT...";
+            if(state.isServer())
+                str = "SERVER...";
+             str+= String.format("Average FPS = %.1f , Last Interval = %d ms",
                     avg, (currentRender - lastRender));
             g2d.setColor(Color.CYAN);
 
@@ -290,8 +308,8 @@ public class GameFrame extends JFrame {
             g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
         }
         try {
-            g2d.drawImage(ImageIO.read(photoHeavy), 5, 40, this);
-            g2d.drawImage(ImageIO.read(photoCheap), 5, 100, this);
+            g2d.drawImage(photoHeavy, 5, 40, this);
+            g2d.drawImage(photoCheap, 5, 100, this);
             String str = state.getTank().getTankBulletNumber();
             g2d.setColor(Color.yellow);
             g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(30.0f));
@@ -306,7 +324,7 @@ public class GameFrame extends JFrame {
 //            healthPaint(g2d,state);
             //////////////////////////////////////////////////
 //            g2d.drawString(str, 8, 8);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //////////////////////////////////
@@ -325,16 +343,17 @@ public class GameFrame extends JFrame {
         int i = 0;
         for (i = 0; i * 100 <= state.getTank().getHealth(); i++) {
             try {
-                g2d.drawImage(ImageIO.read(heart), GAME_WIDTH - 40 - 40 * i, 30, this);
-            } catch (IOException e) {
+                g2d.drawImage(heart, GAME_WIDTH - 40 - 40 * i, 30, this);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         String str2 = "" + state.getTank().getHealth();
         g2d.setColor(Color.yellow);
         g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(30.0f));
-        int strWidth = g2d.getFontMetrics().stringWidth(str2);
         g2d.drawString(str2, GAME_WIDTH - 70 - 40 * i, 60);
+//        int strWidth = g2d.getFontMetrics().stringWidth(str2);
+
     }
 
     /**
@@ -358,6 +377,14 @@ public class GameFrame extends JFrame {
      */
     private void setImage() {
         try {
+            resume=ImageIO.read(new File("resume.png"));
+            resume1=ImageIO.read(new File("resume2.png"));
+            serverNetwork=ImageIO.read(new File("server_network.png"));
+            serverNetwork2=ImageIO.read(new File("server_network2.png"));
+            heart=ImageIO.read(new File("heart.png"));
+            photoCheap =ImageIO.read(new File("src\\Images\\NumberOfMachinGun2.png"));
+            photoHeavy = ImageIO.read(new File("src\\Images\\NumberOfHeavyBullet2.png"));
+
             cursour = ImageIO.read(new File("cursour\\download.png"));
             cursour2 = ImageIO.read(new File("cursour\\cursour.png"));
             tank = ImageIO.read(new File("tank.jpg"));
@@ -382,9 +409,11 @@ public class GameFrame extends JFrame {
 
     }
 
-    private void guiSystem(Graphics2D g2d) {
+    private void guiSystem(Graphics2D g2d,GameState state) {
         //////
         ///////
+        if(conected)
+            inMenu=false;
         g2d.drawImage(tank, 0, 0, this);
 
         //وقتی روی استارت کلیک می کنید
@@ -413,8 +442,10 @@ public class GameFrame extends JFrame {
         }
         //وقتی روی سرور کلیک میکنید
         if (serverClick) {
-            if(num==0)
-            new Server();
+            if(num==0) {
+                server = new Server(state);
+                ThreadPool.execute(server);
+            }
             if(!conected) {
                 try {
                     g2d.drawImage(tank33, 0, 0, this);
@@ -455,7 +486,8 @@ public class GameFrame extends JFrame {
                 }
             }
             else {
-
+                    state.setServer(true);
+                inMenu=false;
             }
         } else {
             if (start) {
@@ -477,7 +509,7 @@ public class GameFrame extends JFrame {
                 g2d.drawImage(internetImage, 160, 10, this);
 
             }
-            if (server) {
+            if (serverImage) {
                 try {
                     g2d.drawImage(ImageIO.read(new File("server_network2.png")), 330, 55, this);
 //                System.out.println("2");
@@ -490,6 +522,12 @@ public class GameFrame extends JFrame {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+            if(resumeGame){
+                g2d.drawImage(resume1, 460, 34, this);
+            }
+            else {
+                g2d.drawImage(resume, 460, 34, this);
             }
             /*		g2d.drawImage(image,state.locX,state.locY,null);*/
         }

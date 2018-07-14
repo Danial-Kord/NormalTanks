@@ -3,10 +3,12 @@ package com.companys;
 
 import com.company.GameFrame;
 import com.company.GameLoop;
+import com.company.SoundsHandeler;
 import com.company.ThreadPool;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import javax.swing.JFrame;
 
 /**
@@ -24,6 +26,11 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+
+                /////
+                SoundsHandeler.playSoundBackGround(new File("music\\01.-Call-Of-Duty-MW3.wav").getAbsoluteFile());
+
+                ////
                 BufferedImage cursorImg = new BufferedImage(15,15,BufferedImage.TYPE_INT_ARGB);
                 Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg,new Point(0,0),"blank cursor");
 

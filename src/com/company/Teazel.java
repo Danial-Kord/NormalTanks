@@ -4,8 +4,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Teazel extends Wall{
+public class Teazel extends Wall implements Serializable {
     public Teazel(int locX, int locY) {
         super(locX, locY);
         try {

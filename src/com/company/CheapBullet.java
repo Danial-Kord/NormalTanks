@@ -14,5 +14,6 @@ public class CheapBullet extends Tir{
             e.printStackTrace();
         }
         rectangle = new Rectangle(locX,locY,moshak.getWidth(),moshak.getHeight());
+        setKind("cheap");
     }
 }

@@ -5,20 +5,23 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Tir {
+public class Tir implements Serializable{
     private int locX, locY;
     private double delytaY, deltaX;
     private int tankDeltaX,tankDeltaY;
     private  int firstTankX,firstTankY;
     private int speed;
     private double shib;
-    BufferedImage moshak;
+    transient BufferedImage moshak;
     private boolean die=false;
     private double i=0;
-    private Tank sorce;
+    private transient Tank sorce;
     private int firstX,firstY;
     protected Rectangle rectangle;
+    private String kind;
+    private String tankSorce;
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib) {
         try {
             moshak = ImageIO.read(new File("Src//bom11.png"));
@@ -56,7 +59,94 @@ public class Tir {
         this(locX,locY,deltaY,deltaX,shib,sorce);
         this.firstTankX = firstTankX;
         this.firstTankY = firstTankY;
+        kind="heavy";
 
+    }
+    public Tir(int locX, int locY, double deltaY, double deltaX, double shib,Tank sorce,int firstTankX,int firstTankY,String kind){
+        this(locX,locY,deltaY,deltaX,shib,sorce);
+        this.firstTankX = firstTankX;
+        this.firstTankY = firstTankY;
+        this.kind = kind;
+    }
+
+    public void setTankSorce(String tankSorce) {
+        this.tankSorce = tankSorce;
+    }
+
+    public String getTankSorce() {
+        return tankSorce;
+    }
+
+    public double getDelytaY() {
+        return delytaY;
+    }
+
+    public void setDelytaY(double delytaY) {
+        this.delytaY = delytaY;
+    }
+
+    public double getDeltaX() {
+        return deltaX;
+    }
+
+    public void setDeltaX(double deltaX) {
+        this.deltaX = deltaX;
+    }
+
+    public void setFirstTankX(int firstTankX) {
+        this.firstTankX = firstTankX;
+    }
+
+    public void setFirstTankY(int firstTankY) {
+        this.firstTankY = firstTankY;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void setShib(double shib) {
+        this.shib = shib;
+    }
+
+    public void setMoshak(BufferedImage moshak) {
+        this.moshak = moshak;
+    }
+
+    public double getI() {
+        return i;
+    }
+
+    public void setI(double i) {
+        this.i = i;
+    }
+
+    public void setSorce(Tank sorce) {
+        this.sorce = sorce;
+    }
+
+    public void setFirstX(int firstX) {
+        this.firstX = firstX;
+    }
+
+    public void setFirstY(int firstY) {
+        this.firstY = firstY;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public Rectangle getRectangle() {

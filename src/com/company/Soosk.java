@@ -19,6 +19,7 @@ public class Soosk extends MilitaryTool{
             e.printStackTrace();
         }
         tank= getImage();
+        kind="Soosk";
     }
 
     public BufferedImage getImage() {

@@ -1,6 +1,8 @@
 /*** In The Name of Allah ***/
 package com.company;
 
+import java.io.File;
+
 /**
  * A very simple structure for the main game loop.
  * THIS IS NOT PERFECT, but works for most situations.
@@ -49,6 +51,9 @@ public class GameLoop implements Runnable {
         }
         }
 
+    public static void setState(GameState state) {
+        GameLoop.state = state;
+    }
 
     @Override
     public void run() {
@@ -65,6 +70,9 @@ public class GameLoop implements Runnable {
             } catch (InterruptedException ex) {
             }
         }
+        SoundsHandeler.backGroundSoundStop();
+        SoundsHandeler.playSoundBackGround(new File("music\\18.-Manhattan-Assault.wav"));
+
 //        System.out.println("این جا مونده");
         canvas.addKeyListener(state.getTank().getKeyListener());
         canvas.addMouseListener(state.getTank().getMouseListener());

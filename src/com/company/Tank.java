@@ -9,25 +9,24 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Tank extends MilitaryTool{
+public class Tank extends MilitaryTool implements Serializable{
     private int numberBullet=20;
     private int numberCheapBullet=5;
     public boolean stateHeavyGun=true;
 
     public int locXLooleh,locYLooleh;
     protected int mouseX, mouseY;
-    protected BufferedImage looleh;
-
-
+    protected transient BufferedImage looleh;
     protected boolean up,down,left,right;
 
 
 
 
-    public Tank(int locX,int locY){
+    public Tank(int locX, int locY){
         super(locX,locY);
         rectangle= new Rectangle(locX,locY,200,200);
         dead=false;

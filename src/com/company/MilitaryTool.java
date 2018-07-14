@@ -2,18 +2,25 @@ package com.company;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MilitaryTool {
-    protected int locX, locY;
+public class MilitaryTool implements Serializable{
+
     public int firstX,firstY;
-    protected int tirRange;
-    protected int range;
     protected int health;
     protected boolean dead;
     protected int count=0;
-    protected BufferedImage tank;
-    protected Rectangle rectangle;
+    protected double rotate;
+    protected String name;
+
+    protected int locX, locY;
+    protected int tirRange;
+    protected int range;
+    protected transient BufferedImage tank;
+    protected  Rectangle rectangle;
+    protected String kind;
+
     public MilitaryTool(int locX,int locY){
         this.locX = locX;
         this.locY = locY;
@@ -22,6 +29,60 @@ public class MilitaryTool {
     }
     public Rectangle getRectangle() {
         return rectangle;
+    }
+    public void setRotate(int rotate) {
+        this.rotate = rotate;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setFirstX(int firstX) {
+        this.firstX = firstX;
+    }
+
+    public void setFirstY(int firstY) {
+        this.firstY = firstY;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public double getRotate() {
+        return rotate;
+    }
+
+    public void setRotate(double rotate) {
+        this.rotate = rotate;
+    }
+
+    public int getTirRange() {
+        return tirRange;
+    }
+
+    public void setTirRange(int tirRange) {
+        this.tirRange = tirRange;
+    }
+
+    public void setTank(BufferedImage tank) {
+        this.tank = tank;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public void setRectangle(Rectangle rectangle) {

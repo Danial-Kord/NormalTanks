@@ -12,6 +12,7 @@ public class Repair extends Prizes {
         } catch (IOException e) {
             e.printStackTrace();
         }
+            path = "repair";
     }
 
     @Override
@@ -20,6 +21,7 @@ public class Repair extends Prizes {
             if (getVisible()) {
                 tank.setHealth(tank.getHealth() + 500);
                 setVisible(false);
+                SoundsHandeler.playSoundInGame(new File("music\\repair.wav"));
             }
         } else {
             return;

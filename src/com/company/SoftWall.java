@@ -5,9 +5,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class SoftWall extends Wall{
-    private BufferedImage moshak2,moshak3;
+public class SoftWall extends Wall implements Serializable {
+    private transient BufferedImage moshak2,moshak3;
     public SoftWall(int locX, int locY) {
         super(locX, locY);
         health = 300;
