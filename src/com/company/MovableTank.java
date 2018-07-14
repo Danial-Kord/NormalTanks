@@ -20,7 +20,6 @@ public class MovableTank extends Tank implements Serializable {
         keyRIGHT = false;
         keyLEFT = false;
         try {
-            tank = ImageIO.read(new File("Src//icon.png"));
             looleh = ImageIO.read(new File("Src//looleh.png"));
         } catch (IOException e) {
             e.printStackTrace();

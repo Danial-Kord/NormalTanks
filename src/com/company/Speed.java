@@ -1,32 +1,24 @@
 package com.company;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Star extends Prizes {
-    public Star(int locX, int locY) {
+public class Speed extends Prizes {
+    public Speed(int locX, int locY) {
         super(locX, locY);
         try {
-            super.image= ImageIO.read(new File("src\\prizes\\star.png"));
+            super.image= ImageIO.read(new File("src\\prizes\\tank repair.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        path="star";
+        path = "repair";
     }
-
-
-
     @Override
     public void task(Tank tank) {
         if (collision(tank)) {
             if (getVisible()) {
-                if(tank instanceof TankHuman){
-                    TankHuman temp = (TankHuman)tank;
-                    temp.setTirSpeed(40);
-                }
+                tank.setSpeed(tank.getSpeed() + 2);
                 setVisible(false);
                 SoundsHandeler.playSoundInGame(new File("music\\repair.wav"));
             }

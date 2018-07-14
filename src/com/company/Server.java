@@ -54,16 +54,16 @@ class ClientHandler implements Runnable {
 
 
                 try (ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream())) {
-//                    ObjectInputStream in = new ObjectInputStream(client.getInputStream());
+                    ObjectInputStream in = new ObjectInputStream(client.getInputStream());
                     boolean sent =false;
                     while (!GameState.isGameOver()) {
                         sent =false;
                         try {
-                            Thread.sleep(1/GameLoop.FPS*1000);
+                            Thread.sleep(25);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        if(state.getChanges().getBuildings().size() != 0 || state.getChanges().getTirs().size() != 0) {
+//                        if(state.getChanges().getBuildings().size() != 0 || state.getChanges().getTirs().size() != 0 || GameState.isChanged()) {
 //                            out.writeInt(state.getChanges().getBuildings().size());
 //                            for (int i=0;i<state.getChanges().getBuildings().size();i++) {
 //                                System.out.println("sent");
@@ -73,30 +73,38 @@ class ClientHandler implements Runnable {
 //                            }
                             out.writeObject(state.getChanges());
                             sent = true;
-                            System.out.println("sent");
+//                            System.out.println("sent");
+                            out.reset();
                             out.flush();
-                        }
+//                        }
                         if(sent){
                             Changes changes = new Changes();
                             state.setChanges(changes);
                         }
-//                        System.out.println("why");
-//                        if(state.getChanges().getBuildings().size() != 0)
-//                            state.getChanges().removeBuilding();
-//                            System.out.println("server sent");
-//                        if(state.getChanges().getBuildings().size()!=0)
-//                            System.out.println(state.getChanges().getBuildings().get(0).locX);
-//                            ArrayList<Building> buildings = (ArrayList<Building>) in.readObject();
-//                            state.getChanges().setRecivedBuildings(buildings);
 
-//                    state.getChanges().removeAll();
-//                        System.out.println(i);
+
+//                        if(sent) {
+//                            Changes changes = (Changes) in.readObject();
+////                            System.out.println("server recived");
+//////                            System.out.println(changes.getBuildings().get(changes.getBuildings().size()-1).locY);
+//////                                System.out.println("client recived");
+//////                                    System.out.println(buildings.get(0).locX);
+////                            if (changes.getBuildings().size() != 0)
+////                                state.getChanges().setRecivedBuildings(changes.getBuildings());
+//                            if (changes.getTirs().size() != 0)
+//                                state.getChanges().setRecivedTirs(changes.getTirs());
+//                            if (changes.getMilitaryTools().size() != 0)
+//                                state.getChanges().setRecivedMilitaryTools(changes.getMilitaryTools());
+
+//                        }
+
+
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             System.out.print("All messages sent.\nClosing client ... ");
-        } catch (IOException e) {
-            e.printStackTrace();
         }  finally {
             try {
                 client.close();

@@ -53,6 +53,7 @@ public class GameFrame extends JFrame {
     public static Boolean hard = false;
     public static Boolean serverClick = false;
     public static boolean resumeGame = false;
+    public static Boolean pause=false;
     //عکس های نیو شده در گویی
     private static Image resume;
     private static Image resume1;
@@ -138,11 +139,26 @@ public class GameFrame extends JFrame {
 
     private void doRendering(Graphics2D g2d, GameState state) {
 
-
+        if(state.isWin()){
+            String str = "HORAAAAAAAY WIN HORAAAAAAAY";
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(g2d.getFont().deriveFont(Font.BOLD).deriveFont(64.0f));
+            int strWidth = g2d.getFontMetrics().stringWidth(str);
+            g2d.drawString(str, (GAME_WIDTH - strWidth) / 2, GAME_HEIGHT / 2);
+            return;
+        }
         if(inMenu){
             guiSystem(g2d,state);
             mouseController(g2d);
             return;
+        }
+        else if(pause){
+            try {
+                g2d.drawImage(ImageIO.read(new File("Untitled-1.png")), 0, 0, this);
+                return;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         //
         // Draw all game elements according
@@ -165,15 +181,26 @@ public class GameFrame extends JFrame {
         double rotationRequired = Math.atan((double) (state.getTank().getMouseY() - state.getTank().locY - 100) /
                 (double) Math.abs(state.getTank().getMouseX() - state.getTank().locX - 100));
 
+        if(state.getTank().getLastRotate() != state.getTank().getRotate()){
+            state.getTank().setLastRotate(state.getTank().getRotate());
+            GameState.setChanged(true);
+        }
         if (state.getTank().getMouseX() - state.getTank().locX - 100 < 0 && state.getTank().getMouseY() - state.getTank().locY - 100 > 0) {
             rotationRequired = Math.PI - rotationRequired;
         }
         if (state.getTank().getMouseX() - state.getTank().locX - 100 < 0 && state.getTank().getMouseY() - state.getTank().locY - 100 < 0) {
             rotationRequired = -Math.PI - rotationRequired;
         }
+        state.getTank().setRotate(rotationRequired);
         AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, 100, 100);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 
+        for (int i = 0; i < state.getTirs().size(); i++) {
+            double rotationRequired1 = state.getTirs().get(i).getShib();
+            AffineTransform tx1 = AffineTransform.getRotateInstance(rotationRequired1, 35, 35);
+            AffineTransformOp op1 = new AffineTransformOp(tx1, AffineTransformOp.TYPE_BILINEAR);
+            g2d.drawImage(op1.filter(state.getTirs().get(i).moshak, null), state.getTirs().get(i).getLocX(), state.getTirs().get(i).getLocY(), null);
+        }
         if (j % 200 == 0) {
         }
         j++;
@@ -181,38 +208,49 @@ public class GameFrame extends JFrame {
 //        System.out.println("fsfsfsfsfs");
         //enemy tanks
         for (int i = 0; i < state.getMilitaryTools().size(); i++) {
-
             double rotate;
-            if(!state.isClient()) {
+            if (!state.isClient()) {
                 rotate = Math.atan((double) (state.getTank().locY - state.getMilitaryTools().get(i).locY) /
                         (double) Math.abs(state.getTank().locX - state.getMilitaryTools().get(i).locX));
-                state.getMilitaryTools().get(i).setRotate(rotate);
-            }
-            else {
+            } else {
                 rotate = state.getMilitaryTools().get(i).getRotate();
             }
-            if (state.getTank().locX - state.getMilitaryTools().get(i).locX < 0 && state.getTank().locY - state.getMilitaryTools().get(i).locY > 0) {
-                rotate = Math.PI - rotate;
+            if (((state.getTank().getName().equals("server") && !state.getMilitaryTools().get(i).getName().equals("client")) &&
+                    (state.getTank().getName().equals("client") && !state.getMilitaryTools().get(i).getName().equals("server")))
+                    || (!state.getTank().getName().equals("client") && !state.getTank().getName().equals("server"))) {
+                if (!state.isClient()) {
+                    if (state.getTank().locX - state.getMilitaryTools().get(i).locX < 0 && state.getTank().locY - state.getMilitaryTools().get(i).locY > 0) {
+                        rotate = Math.PI - rotate;
+                    }
+                    if (state.getTank().locX - state.getMilitaryTools().get(i).locX < 0 && state.getTank().locY - state.getMilitaryTools().get(i).locY < 0) {
+                        rotate = -Math.PI - rotate;
+                    }
+                    state.getMilitaryTools().get(i).setRotate(rotate);
+                    if (state.getMilitaryTools().get(i).getLastRotate() != state.getMilitaryTools().get(i).getRotate()) {
+                        state.getMilitaryTools().get(i).setLastRotate(state.getMilitaryTools().get(i).getRotate());
+                        GameState.setChanged(true);
+                    }
+                }
+            }else {
+
             }
-            if (state.getTank().locX - state.getMilitaryTools().get(i).locX < 0 && state.getTank().locY - state.getMilitaryTools().get(i).locY < 0) {
-                rotate = -Math.PI - rotate;
-            }
+
             AffineTransform tx2 = AffineTransform.getRotateInstance(rotate, 100, 100);
             AffineTransformOp op3 = new AffineTransformOp(tx2, AffineTransformOp.TYPE_BILINEAR);
             if (state.getMilitaryTools().get(i) instanceof PoisenosStaticTank){
                 PoisenosStaticTank temp = (PoisenosStaticTank) state.getMilitaryTools().get(i);
                 g2d.drawImage(temp.getRedZone(), state.getMilitaryTools().get(i).locX, state.getMilitaryTools().get(i).locY , null);
             }
-            g2d.drawImage(state.getMilitaryTools().get(i).getTank(), state.getMilitaryTools().get(i).locX, state.getMilitaryTools().get(i).locY, null);
-            if (state.getMilitaryTools().get(i) instanceof SimpleStaticTank){
-                Tank temp = (StaticTank)state.getMilitaryTools().get(i);
-                g2d.drawImage(op3.filter(temp.getLooleh(), null), state.getMilitaryTools().get(i).locX - 24, state.getMilitaryTools().get(i).locY - 24, null);
+            try {
+                g2d.drawImage(state.getMilitaryTools().get(i).getTank(), state.getMilitaryTools().get(i).locX, state.getMilitaryTools().get(i).locY, null);
+            }catch (NullPointerException e){
+                
             }
-            else
-            if(state.getMilitaryTools().get(i) instanceof Tank){
+            if(!(state.getMilitaryTools().get(i) instanceof PoisenosStaticTank) && state.getMilitaryTools().get(i) instanceof Tank){
                 Tank temp = (Tank) state.getMilitaryTools().get(i);
                 g2d.drawImage(op3.filter(temp.getLooleh(), null), state.getMilitaryTools().get(i).locX, state.getMilitaryTools().get(i).locY, null);
             }
+
         }
 //        if(!state.soosk.dead)
 //        g2d.drawImage(state.soosk.getImage(), state.soosk.getLocX(), state.soosk.getLocY(), null);
@@ -241,14 +279,13 @@ public class GameFrame extends JFrame {
                 }
             }
         }
-        for (int i = 0; i < state.getTirs().size(); i++) {
-            double rotationRequired1 = state.getTirs().get(i).getShib();
-            AffineTransform tx1 = AffineTransform.getRotateInstance(rotationRequired1, 35, 35);
-            AffineTransformOp op1 = new AffineTransformOp(tx1, AffineTransformOp.TYPE_BILINEAR);
-            g2d.drawImage(op1.filter(state.getTirs().get(i).moshak, null), state.getTirs().get(i).getLocX(), state.getTirs().get(i).getLocY(), null);
-        }
         g2d.drawImage(op.filter(state.getTank().getLooleh(), null), state.getTank().locX, state.getTank().locY, null);
 
+        for (int i = 0; i < state.getPrizes().size(); i++) {
+            if (state.getPrizes().get(i).getVisible()) {
+                g2d.drawImage(state.getPrizes().get(i).image, state.getPrizes().get(i).getLocX(), state.getPrizes().get(i).getLocY(), this);
+            }
+        }
         for (int i = 0; i < state.getWalls().size(); i++) {
             g2d.drawImage(state.getWalls().get(i).getMoshak(), state.getWalls().get(i).getLocX()
                     , state.getWalls().get(i).getLocY(), null);
@@ -259,11 +296,7 @@ public class GameFrame extends JFrame {
                     , state.getGrasses().get(i).getLocY(), null);
         }
 
-        for (int i = 0; i < state.getPrizes().size(); i++) {
-            if (state.getPrizes().get(i).getVisible()) {
-                g2d.drawImage(state.getPrizes().get(i).image, state.getPrizes().get(i).getLocX(), state.getPrizes().get(i).getLocY(), this);
-            }
-        }
+
 
 
         // Print FPS info

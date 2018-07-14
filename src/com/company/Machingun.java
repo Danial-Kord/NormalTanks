@@ -21,6 +21,7 @@ public class Machingun extends Prizes {
             if (getVisible()) {
                 tank.plusCheapBullet(30);
                 setVisible(false);
+                SoundsHandeler.playSoundInGame(new File("music\\repair.wav"));
             }
         } else {
             return;

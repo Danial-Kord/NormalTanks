@@ -12,6 +12,7 @@ public class MilitaryTool implements Serializable{
     protected boolean dead;
     protected int count=0;
     protected double rotate;
+    protected double lastRotate;
     protected String name;
 
     protected int locX, locY;
@@ -27,6 +28,15 @@ public class MilitaryTool implements Serializable{
         firstX=locX;
         firstY=locY;
     }
+
+    public void setLastRotate(double lastRotate) {
+        this.lastRotate = lastRotate;
+    }
+
+    public double getLastRotate() {
+        return lastRotate;
+    }
+
     public Rectangle getRectangle() {
         return rectangle;
     }

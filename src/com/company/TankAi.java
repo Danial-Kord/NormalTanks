@@ -18,34 +18,22 @@ public class TankAi extends MovableTank{
     }
     public TankAi(int locX, int locY,int rangeX,int rangeY,int tirRange) {
         super(locX, locY);
-        this.rangeX=range;
-        this.rangeY=range;
+        this.rangeX=rangeX;
+        this.rangeY=rangeY;
         this.tirRange = tirRange;
         kind = "TankAi";
+        health = 300;
+        try {
+            tank = ImageIO.read(new File("src\\Images\\BigEnemy.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void setHealth(int health) {
         super.setHealth(health);
-        if (health >= 3) {
-            try {
-                tank = ImageIO.read(new File("Src//icon.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (health >= 2) {
-            try {
-                tank = ImageIO.read(new File("Src//icon2.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (health == 1) {
-            try {
-                tank = ImageIO.read(new File("Src//icon3.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
     public void update(ArrayList<Wall> walls) {
@@ -82,27 +70,32 @@ public class TankAi extends MovableTank{
                     keyLEFT = random.nextBoolean();
             }
                 if (keyUP) {
-                    if (Math.abs(deltaX)<=rangeX && Math.abs(deltaY-1)<=rangeY) {
-                        firstY -= 1;
-                        deltaX-=8;
+                    if (Math.abs(deltaX)<=rangeX && Math.abs(deltaY-8)<=rangeY) {
+                        firstY -= 8;
+                        deltaY-=8;
                     }
                 }
+
             if(keyDOWN){
-                if(Math.abs(deltaX)<=rangeX && Math.abs(deltaY+1)<=rangeY) {
-                    firstY += 1;
-                    deltaY += 8;
+                if(Math.abs(deltaX)<=rangeX && Math.abs(deltaY-8)<=rangeY) {
+                    GameState.setChanged(true);
+                    firstY -= 8;
+                    deltaY -= 8;
                 }
             }
             if(keyRIGHT ){
-                if(Math.abs(deltaX+1)<=rangeX && Math.abs(deltaY)<=rangeY) {
-                    firstX += 1;
+                if(Math.abs(deltaX+8)<=rangeX && Math.abs(deltaY)<=rangeY) {
+
+                    GameState.setChanged(true);
+                    firstX +=8;
                     deltaX+=8;
                 }
             }
             if(keyLEFT ){
-                if(Math.abs(deltaX-1)<=rangeX && Math.abs(deltaY)<=rangeY) {
+                if(Math.abs(deltaX-8)<=rangeX && Math.abs(deltaY)<=rangeY) {
 
-                    firstX -= 1;
+                    GameState.setChanged(true);
+                    firstX -= 8;
                     deltaX-=8;
                 }
             }

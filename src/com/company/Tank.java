@@ -22,7 +22,7 @@ public class Tank extends MilitaryTool implements Serializable{
     protected int mouseX, mouseY;
     protected transient BufferedImage looleh;
     protected boolean up,down,left,right;
-
+    protected int speed;
 
 
 
@@ -53,7 +53,15 @@ public class Tank extends MilitaryTool implements Serializable{
     }
 
 
-    public void update(ArrayList<Wall> walls,ArrayList<Tank>tanks){
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void update(ArrayList<Wall> walls, ArrayList<Tank>tanks){
         count++;
     }
 

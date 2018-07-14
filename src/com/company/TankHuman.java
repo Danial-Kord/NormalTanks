@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class TankHuman extends MovableTank implements Serializable {
-
+    private Boolean H, E, L, P, G, U, N;
     private boolean mousePress,mouseRealised;
     public boolean gameOver;
-    private KeyHandler keyHandler;
-    private MouseHandler mouseHandler;
+    private transient KeyHandler keyHandler;
+    private transient MouseHandler mouseHandler;
     private boolean stop;
     ////////////////
     private int tirSpeed;
@@ -30,6 +30,12 @@ public class TankHuman extends MovableTank implements Serializable {
         stop = false;
         tirSpeed = 20;
         kind  = "TankHuman";
+        speed = 4;
+        try {
+            tank = ImageIO.read(new File("Src//icon.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setTirSpeed(int tirSpeed) {
@@ -83,42 +89,46 @@ public class TankHuman extends MovableTank implements Serializable {
         right=false;
         if (keyUP ) {
             if(locY-1>80)
-            locY -= 1;
+            locY -= speed;
             deltaY+=-2;
             if(check(walls,"down")) {
+                GameState.setChanged(true);
                 deltaY += 2;
                 if(locY-1>80)
-                locY += 1;
+                locY += speed;
             }
         }
         if (keyDOWN ) {
             if(locY+1<700)
-            locY +=1;
+            locY +=speed;
             deltaY+=2;
             if(check(walls,"up")) {
+                GameState.setChanged(true);
                 deltaY += -2;
                 if(locY+1<700)
-                locY -=1;
+                locY -=speed;
             }
         }
         if (keyLEFT ) {
             if(locX-1>200)
-            locX -= 1;
+            locX -= speed;
             deltaX+=-2;
             if(check(walls,"right")) {
+                GameState.setChanged(true);
                 deltaX += +2;
                 if(locX-1>200)
-                locX += 1;
+                locX += speed;
             }
         }
         if (keyRIGHT ) {
             if(locX+1<1400)
-            locX += 1;
+            locX += speed;
             deltaX+=2;
             if(check(walls,"left")) {
+                GameState.setChanged(true);
                 deltaX += -2;
                 if(locX+1<1400)
-                locX -= 1;
+                locX -= speed;
             }
         }
 
@@ -170,12 +180,36 @@ public class TankHuman extends MovableTank implements Serializable {
 //    }
     @Override
     public void setHealth(int health) {
+        GameState.setChanged(true);
         super.setHealth(health);
+        if (health >= 300) {
+            try {
+                tank = ImageIO.read(new File("src\\Icon.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (health >= 200) {
+            try {
+                tank = ImageIO.read(new File("src\\Icon2.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (health == 100) {
+            try {
+                tank = ImageIO.read(new File("src\\Icon3.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if(dead) {
             gameOver = true;
             SoundsHandeler.backGroundSoundStop();
             SoundsHandeler.playSoundBackGround(new File("music\\death.wav").getAbsoluteFile());
 
+        }
+        if(this.health>0){
+            gameOver=false;
+            dead=false;
         }
     }
     public boolean isMousePress() {
@@ -184,8 +218,7 @@ public class TankHuman extends MovableTank implements Serializable {
     class KeyHandler extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            switch (e.getKeyCode())
-            {
+            switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
                     keyUP = true;
                     break;
@@ -198,13 +231,20 @@ public class TankHuman extends MovableTank implements Serializable {
                 case KeyEvent.VK_RIGHT:
                     keyRIGHT = true;
                     break;
+                case KeyEvent.VK_S:
+                    System.out.println("دکمه s رو زدی");
+                    break;
+                case KeyEvent.VK_ESCAPE:{
+                    GameFrame.pause=!GameFrame.pause;
+                    break;
+                }
+
             }
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            switch (e.getKeyCode())
-            {
+            switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
                     keyUP = false;
                     break;
@@ -217,11 +257,75 @@ public class TankHuman extends MovableTank implements Serializable {
                 case KeyEvent.VK_RIGHT:
                     keyRIGHT = false;
                     break;
-                    ///////////
+                ///////////
                 case KeyEvent.VK_ESCAPE:
                     pause = !pause;
                     break;
-                    /////////////
+                /////////////
+                ///این قسمت دارم زور می زنم کد چیت به دست بیاد
+                case KeyEvent.VK_H: {
+                    H = true;
+                    break;
+                }
+                case KeyEvent.VK_E: {
+                    if (H) {
+                        E = true;
+                    } else {
+                        H = false;
+                    }
+                    break;
+                }
+                case KeyEvent.VK_L: {
+                    if (E) {
+                        L = true;
+                    } else {
+                        H = false;
+                        E = false;
+                    }
+                    break;
+                }
+                case KeyEvent.VK_P: {
+                    if (L) {
+                        setHealth(getHealth() + 500);
+                    }
+                    H = false;
+                    E = false;
+                    L = false;
+                    break;
+                }
+                case KeyEvent.VK_G: {
+                    G = true;
+                    break;
+                }
+                case KeyEvent.VK_U:{
+                    if(G){
+                        U=true;
+                    }
+                    else {
+                        G=false;
+                    }
+                    break;
+                }
+                case KeyEvent.VK_N:{
+                    if(U){
+                        plusCheapBullet(50);
+                        plusBullet(50);
+                    }
+                    G=false;
+                    U=false;
+                    N=false;
+                    break;
+                }
+                default:{
+                    H=false;
+                    L=false;
+                    E=false;
+                    P=false;
+                    G=false;
+                    U=false;
+                    N=false;
+                }
+
             }
         }
 
@@ -242,25 +346,24 @@ public class TankHuman extends MovableTank implements Serializable {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            if (e.getButton() == 3){
+            if (e.getButton() == 3) {
 
-                if(stateHeavyGun==true){
-                    stateHeavyGun=false;
+                if (stateHeavyGun == true) {
+                    stateHeavyGun = false;
                     try {
-                        looleh= ImageIO.read(new File("Src//Images//tankGun02.png"));
+                        looleh = ImageIO.read(new File("Src//Images//tankGun02.png"));
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                } else {
+                    stateHeavyGun = true;
+                    try {
+                        looleh = ImageIO.read(new File("Src//looleh.png"));
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
                 }
-                else {
-                    stateHeavyGun=true;
-                    try {
-                        looleh= ImageIO.read(new File("Src//looleh.png"));
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }else{
+            } else {
                 mouseX = e.getX();
                 mouseY = e.getY();
                 mousePress = true;
@@ -270,8 +373,8 @@ public class TankHuman extends MovableTank implements Serializable {
         @Override
         public void mouseReleased(MouseEvent e) {
             mousePress = false;
-            if(e.getButton() != 3)
-            mouseRealised = true;
+            if (e.getButton() != 3)
+                mouseRealised = true;
             mouseX = e.getX();
             mouseY = e.getY();
 //            System.out.println(""+mouseX +".............." +mouseY);

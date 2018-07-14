@@ -45,6 +45,7 @@ public class Tir implements Serializable{
     public Tir(int locX, int locY, double deltaY, double deltaX, double shib, Tank sorce){
         this(locX,locY,deltaY,deltaX,shib);
         this.sorce=sorce;
+        if(sorce!=null)
         sorce.minus();
         ////
         if(sorce instanceof TankHuman) {

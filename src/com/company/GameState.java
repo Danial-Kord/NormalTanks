@@ -29,7 +29,7 @@ public class GameState {
     private ArrayList<Building> buildings;
     private Changes changes;
     private ArrayList<MilitaryTool>militaryTools = new ArrayList<MilitaryTool>();
-    public Soosk soosk = new Soosk(1000,1000);
+    public Soosk soosk = new Soosk(1000,200);
     private ArrayList<TankHuman>tankHumens;
     public ArrayList<Prizes> getPrizes() {
         return prizes;
@@ -43,6 +43,8 @@ public class GameState {
     public static boolean gameOver;
     private boolean mousePress;
     private int mouseX, mouseY;
+    private static boolean changed;
+    private boolean win = false;
     /////////////////
     private boolean client=false;
     private boolean server=false;
@@ -69,6 +71,7 @@ public class GameState {
         grasses = new ArrayList<Grass>();
         walls = new ArrayList<Wall>();
         tank = new TankHuman(1200, 800);
+        tank.setName("me");
         tankHumens.add(tank); 
         tirs = new ArrayList<Tir>();
         tanks = new ArrayList<Tank>();
@@ -76,11 +79,12 @@ public class GameState {
         prizes.add(new Machingun(1400, 890));
         prizes.add(new Repair(1400, 940));
         prizes.add(new Star(1400, 960));
+        prizes.add(new Star(500,3500));
         mapCreator();
         for (int i=0;i<tanks.size();i++)
             militaryTools.add(tanks.get(i));
-//        militaryTools.add(soosk);
-//        soosk.setName(soosk.getKind());
+        militaryTools.add(soosk);
+        soosk.setName(soosk.getKind());
         /////////////////////////////////
         for (int i = 0; i < walls.size(); i++)
             buildings.add(walls.get(i));
@@ -116,15 +120,23 @@ public class GameState {
         return tankHumens;
     }
 
+    public static void setChanged(boolean changed) {
+        GameState.changed = changed;
+    }
+
+    public static boolean isChanged() {
+        return changed;
+    }
+
     public void updateOnlineChanges(){
-        for (int i=0;i<changes.getRecivedBuildings().size();i++){
-            for (int j=0;j<this.buildings.size();j++) {
-                if (changes.getRecivedBuildings().get(i).getFirstX() == this.buildings.get(j).getFirstX() && changes.getRecivedBuildings().get(i).getFirstY() == this.buildings.get(j).getFirstY()){
-                        this.buildings.get(j).setHealth(changes.getRecivedBuildings().get(i).getHealth());
-                    this.buildings.get(j).setDie(changes.getRecivedBuildings().get(i).isDie());
-                }
-            }
-        }
+//        for (int i=0;i<changes.getRecivedBuildings().size();i++){
+//            for (int j=0;j<this.buildings.size();j++) {
+//                if (changes.getRecivedBuildings().get(i).getFirstX() == this.buildings.get(j).getFirstX() && changes.getRecivedBuildings().get(i).getFirstY() == this.buildings.get(j).getFirstY()){
+//                        this.buildings.get(j).setHealth(changes.getRecivedBuildings().get(i).getHealth());
+//                    this.buildings.get(j).setDie(changes.getRecivedBuildings().get(i).isDie());
+//                }
+//            }
+//        }
         for(int i=0;i<changes.getRecivedTirs().size();i++){
             //TODO
             Tank temp = null;
@@ -198,6 +210,10 @@ public class GameState {
 
     public MouseMotionListener getMouseMotionListener() {
         return mouseHandler;
+    }
+
+    public boolean isWin() {
+        return win;
     }
 
     public KeyListener getKeyListener() {
@@ -278,7 +294,7 @@ public class GameState {
 
         }
         if(GameFrame.resumeGame){
-            
+
         }
     }
 
@@ -290,9 +306,13 @@ public class GameState {
      * The method which updates the game state.
      */
     private void mapCreator() {
-            tanks.add(new TankAi(300, 100, 100, 10, 1000000));
+            tanks.add(new TankAi(300, 100, 100, 0, 1000000));
             tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
-            tanks.add(new SimpleStaticTank(100, 2800, 1000000));
+        tanks.add(new TankAi(300, 600, 200, 20, 1000000));
+        tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
+            tanks.add(new TankAi(500,2100,200,200,1000000));
+           tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
+           tanks.add(new SimpleStaticTank(100, 2800, 1000000));
             tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
             tanks.add(new PoisenosStaticTank(100, 2200, 1000000));
             tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
@@ -436,6 +456,7 @@ public class GameState {
     }
 
     public void update() {
+        changed = false;
         //
         // Update the state of all game elements
         //  based on user input and elapsed time ...
@@ -444,9 +465,20 @@ public class GameState {
 
         if (GameFrame.inMenu) {
             guiSensourArea();
-        } else {
-            if (tank.isPause())
+        }
+        else if(GameFrame.pause){
+            return;
+        }
+        else {
+            if(militaryTools.size()==0){
+                win = true;
                 return;
+            }
+            if(militaryTools.size()==1){
+                if(militaryTools.get(0).getName().equals("server") || militaryTools.get(0).getName().equals("client"))
+                    win=true;
+                return;
+            }
             if(server || client){
                 updateOnlineChanges();
 //                changes.removeRecivedBuilding();
@@ -581,7 +613,7 @@ public class GameState {
             militaryTools.get(i).update(walls);
             militaryTools.get(i).update(tank);//update tank information
             if(!client)
-            if(militaryTools.get(i) instanceof TankAi || militaryTools.get(i) instanceof StaticTank){
+            if(militaryTools.get(i) instanceof TankAi || militaryTools.get(i) instanceof SimpleStaticTank){
                 Tank temp = (Tank) militaryTools.get(i);
                 if(Math.pow(tank.locY-militaryTools.get(i).locY,2)+Math.pow(tank.locX-militaryTools.get(i).locX,2) < militaryTools.get(i).tirRange) {
                     if (militaryTools.get(i).getCount() % 30 == 0) {
@@ -624,6 +656,12 @@ public class GameState {
                 for (int j=0;j<militaryTools.size();j++){
                     if(flag)
                         break;
+                    if(militaryTools.get(j) instanceof Soosk) {
+                        Soosk temp =(Soosk) (militaryTools.get(j));
+                        if (!temp.isActive())
+                            continue;
+                    }
+
                     if(militaryTools.get(j) != tirs.get(i).getSorce())
                         if (Math.pow(militaryTools.get(j).locX+militaryTools.get(j).tank.getWidth()/2  - tirs.get(i).getLocX() , 2) + Math.pow(militaryTools.get(j).locY + militaryTools.get(j).tank.getHeight()/2 - tirs.get(i).getLocY() - 29, 2) <4000) {
 //                            System.out.println("ds");

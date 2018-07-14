@@ -21,16 +21,16 @@ public class Changes implements Serializable{
     }
         public void update(ArrayList<Building>newBuildings,ArrayList<Tir>newTirs,TankHuman tankHuman,GameState state){
         for (int i=0;i<newBuildings.size();i++){
-            Building building = new Building(newBuildings.get(i).locX,newBuildings.get(i).locY);
-            building.setHealth(newBuildings.get(i).getHealth());
-            building.setDie(newBuildings.get(i).isDie());
-            buildings.add(building);
+//            Building building = new Building(newBuildings.get(i).locX,newBuildings.get(i).locY);
+//            building.setHealth(newBuildings.get(i).getHealth());
+//            building.setDie(newBuildings.get(i).isDie());
+            buildings.add((Building) newBuildings.get(i));
             System.out.println("added");
         }
         for (int i=0;i<newTirs.size();i++){
             //TODO
             Tir tir = new Tir(newTirs.get(i).getFirstX()+tankHuman.getDeltaX(),newTirs.get(i).getFirstY()+tankHuman.getDeltaY(),newTirs.get(i).getDelytaY(),newTirs.get(i).getDeltaX(),
-                    newTirs.get(i).getShib(),tankHuman,newTirs.get(i).getFirstTankX()+tankHuman.getDeltaX(),newTirs.get(i).getFirstTankY()+tankHuman.getDeltaY());
+                    newTirs.get(i).getShib(),null,newTirs.get(i).getFirstTankX()+tankHuman.getDeltaX(),newTirs.get(i).getFirstTankY()+tankHuman.getDeltaY());
             tir.setTankSorce(newTirs.get(i).getTankSorce());
             tirs.add(tir);
         }
@@ -38,11 +38,11 @@ public class Changes implements Serializable{
         militaryTools = new ArrayList<MilitaryTool>();
         while (iterator.hasNext()){
             MilitaryTool temp = (MilitaryTool)iterator.next();
-            MilitaryTool militaryTool = new MilitaryTool(temp.getFirstX(),temp.getFirstY());
-            militaryTool.setRotate(temp.getRotate());
-            militaryTool.setHealth(temp.getHealth());
-            militaryTool.setName(temp.getName());
-            militaryTools.add(militaryTool);
+//            MilitaryTool militaryTool = new MilitaryTool(temp.getFirstX(),temp.getFirstY());
+//            militaryTool.setRotate(temp.getRotate());
+//            militaryTool.setHealth(temp.getHealth());
+//            militaryTool.setName(temp.getName());
+            militaryTools.add((MilitaryTool) (temp));
 //            MilitaryTool militaryTool = new MilitaryTool(state.getMilitaryTools().get(i).getFirstX(),state.getMilitaryTools().get(i).getFirstY());
 //            militaryTool.setRotate(state.getMilitaryTools().get(i).getRotate());
 //            militaryTool.setHealth(state.getMilitaryTools().get(i).getHealth());

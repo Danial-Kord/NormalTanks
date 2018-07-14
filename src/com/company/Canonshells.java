@@ -21,6 +21,7 @@ public class Canonshells extends Prizes {
             if (getVisible()) {
                 tank.plusBullet(35);
                 setVisible(false);
+                SoundsHandeler.playSoundInGame(new File("music\\repair.wav"));
             }
         } else {
             return;

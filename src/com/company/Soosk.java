@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Soosk extends MilitaryTool{
-    private BufferedImage image;
+    private transient BufferedImage image;
+    private boolean active;
     public Soosk(int locX, int locY) {
         super(locX, locY);
+        active=false;
         rectangle = new Rectangle(locX,locY,100,100);
         health = 100;
         try {
@@ -18,7 +20,7 @@ public class Soosk extends MilitaryTool{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        tank= getImage();
+        tank= null;
         kind="Soosk";
     }
 
@@ -26,10 +28,16 @@ public class Soosk extends MilitaryTool{
         return image;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
     public void update(TankHuman tank) {
         if(dead)
             return;
-        if(Math.abs(tank.locY - locY) <=600 && Math.abs(tank.locX - locX) <=600){
+        if(Math.abs(tank.locY - locY) <=400 && Math.abs(tank.locX - locX) <=400){
+            this.tank = image;
+            active=true;
             double deltaX=tank.locX-locX+100;
             double deltaY=tank.locY-locY+100;
             deltaX =deltaX/Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2));
