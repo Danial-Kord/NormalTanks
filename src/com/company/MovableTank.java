@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * kind of tank can move
+ */
 public class MovableTank extends Tank implements Serializable {
     protected boolean keyUP, keyDOWN, keyRIGHT, keyLEFT;
     protected int deltaX,deltaY;
@@ -25,6 +28,12 @@ public class MovableTank extends Tank implements Serializable {
             e.printStackTrace();
         }
 }
+    /**
+     * this  manage the photo of the tank and its depends
+     * @param locX
+     * @param locY
+     * @param range
+     */
     public MovableTank(int locX,int locY,int range){
         super(locX,locY,range);
         try {
@@ -42,6 +51,14 @@ public class MovableTank extends Tank implements Serializable {
     public int getDeltaY() {
         return deltaY;
     }
+
+    /**
+     *
+     * @param walls all existed walls in game
+     * @param jahat wich point touch
+     * @return
+     */
+    //بر خورد با دیوار ها را چک می کند
     protected boolean check(ArrayList<Wall>walls,String jahat){
 
 

@@ -7,10 +7,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * kind of walls that can be destroyed
+ */
 public class SoftWall extends Wall implements Serializable {
     private transient BufferedImage moshak2,moshak3;
     public SoftWall(int locX, int locY) {
         super(locX, locY);
+        kind = "softWall";
         health = 300;
         try {
                 moshak = ImageIO.read(new File("Src//softWall.png"));

@@ -4,10 +4,14 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TankAi extends MovableTank{
+/**
+ * tanks have intelligence
+ */
+public class TankAi extends MovableTank implements Serializable{
 
     private int  rangeX,rangeY;
     public TankAi(int locX, int locY,int range,int tirRange) {
@@ -34,6 +38,14 @@ public class TankAi extends MovableTank{
     public void setHealth(int health) {
         super.setHealth(health);
 
+    }
+
+    public int getRangeX() {
+        return rangeX;
+    }
+
+    public int getRangeY() {
+        return rangeY;
     }
 
     public void update(ArrayList<Wall> walls) {

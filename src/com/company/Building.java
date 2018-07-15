@@ -3,6 +3,9 @@ package com.company;
 import java.awt.*;
 import java.io.Serializable;
 
+/**
+ * this class contains all object that arent alive information
+ */
 public class Building implements Serializable{
     protected int locX;
     protected int locY;
@@ -10,11 +13,20 @@ public class Building implements Serializable{
     protected int health;
     protected boolean die;
     protected final int firstX,firstY;
+    protected  String kind;
     public Building(int locX,int locY){
         this.locX = locX;
         this.locY = locY;
         firstX=locX;
         firstY=locY;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public String getKind() {
+        return kind;
     }
 
     public void setHealth(int health) {

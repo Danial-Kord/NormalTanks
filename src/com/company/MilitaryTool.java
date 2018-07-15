@@ -5,9 +5,12 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * save all of the military information in game
+ */
 public class MilitaryTool implements Serializable{
 
-    public int firstX,firstY;
+    protected int firstX,firstY;
     protected int health;
     protected boolean dead;
     protected int count=0;

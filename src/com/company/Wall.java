@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * kind of bulding that wont allow any tanks to move inside it
+ */
 public class Wall extends Building implements Serializable {
     protected transient BufferedImage moshak;
     protected Rectangle rectangle;

@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * this jfram get information for connectin to ip address
+ */
 public class GuiConnection {
     JFrame jFrame = new JFrame();
     JTextField ipAddress;

@@ -16,7 +16,7 @@ import java.awt.event.MouseMotionListener;
  * This class holds the state of the game and all of its elements.
  * This class also handles user inputs, which affect the game state.
  *
- * @author Seyed Mohammad Ghaffarian
+ * @author  danial kordmodanlou && amir hosein kashani
  */
 public class GameState {
 
@@ -29,7 +29,7 @@ public class GameState {
     private ArrayList<Building> buildings;
     private Changes changes;
     private ArrayList<MilitaryTool>militaryTools = new ArrayList<MilitaryTool>();
-    public Soosk soosk = new Soosk(1000,200);
+    private Soosk soosk = new Soosk(1000,200);
     private ArrayList<TankHuman>tankHumens;
     public ArrayList<Prizes> getPrizes() {
         return prizes;
@@ -45,6 +45,7 @@ public class GameState {
     private int mouseX, mouseY;
     private static boolean changed;
     private boolean win = false;
+    TankHuman tank2;
     /////////////////
     private boolean client=false;
     private boolean server=false;
@@ -70,21 +71,24 @@ public class GameState {
         buildings = new ArrayList<Building>();
         grasses = new ArrayList<Grass>();
         walls = new ArrayList<Wall>();
+        tanks = new ArrayList<Tank>();
+
         tank = new TankHuman(1200, 800);
         tank.setName("me");
         tankHumens.add(tank); 
         tirs = new ArrayList<Tir>();
-        tanks = new ArrayList<Tank>();
+
         prizes.add(new Canonshells(1400, 860));
         prizes.add(new Machingun(1400, 890));
         prizes.add(new Repair(1400, 940));
         prizes.add(new Star(1400, 960));
         prizes.add(new Star(500,3500));
+        prizes.add(new Speed(1400,800));
         mapCreator();
         for (int i=0;i<tanks.size();i++)
             militaryTools.add(tanks.get(i));
-        militaryTools.add(soosk);
         soosk.setName(soosk.getKind());
+        militaryTools.add(soosk);
         /////////////////////////////////
         for (int i = 0; i < walls.size(); i++)
             buildings.add(walls.get(i));
@@ -128,6 +132,9 @@ public class GameState {
         return changed;
     }
 
+    /**
+     * update information while in squad
+     */
     public void updateOnlineChanges(){
 //        for (int i=0;i<changes.getRecivedBuildings().size();i++){
 //            for (int j=0;j<this.buildings.size();j++) {
@@ -154,17 +161,19 @@ public class GameState {
                 SoundsHandeler.playSoundInGame(new File("music\\heavygun.wav").getAbsoluteFile());
                 //این جا تیر معمولی خودمون
             }
-            if(changes.getRecivedTirs().get(i).getKind().equals("cheap")){
-                this.tirs.add(new CheapBullet(changes.getRecivedTirs().get(i).getFirstX(),changes.getRecivedTirs().get(i).getFirstY(),changes.getRecivedTirs().get(i).getDelytaY(),changes.getRecivedTirs().get(i).getDeltaX(),
-                        changes.getRecivedTirs().get(i).getShib(),temp,changes.getRecivedTirs().get(i).getFirstTankX(),changes.getRecivedTirs().get(i).getFirstTankY()));
-                SoundsHandeler.playSoundInGame(new File("music\\lightgun.wav").getAbsoluteFile());
-                //این جا ماشین گان خودمون
-            }
+//            if(changes.getRecivedTirs().get(i).getKind().equals("cheap")){
+//                this.tirs.add(new CheapBullet(changes.getRecivedTirs().get(i).getFirstX(),changes.getRecivedTirs().get(i).getFirstY(),changes.getRecivedTirs().get(i).getDelytaY(),changes.getRecivedTirs().get(i).getDeltaX(),
+//                        changes.getRecivedTirs().get(i).getShib(),temp,changes.getRecivedTirs().get(i).getFirstTankX(),changes.getRecivedTirs().get(i).getFirstTankY()));
+//                SoundsHandeler.playSoundInGame(new File("music\\lightgun.wav").getAbsoluteFile());
+//                //این جا ماشین گان خودمون
+//            }
+            //TODO
         }
+
         for (int i=0;i<changes.getRecivedMilitaryTools().size();i++) {
             for (int j = 0; j < militaryTools.size(); j++) {
                 //TODO client ya server masaleh in ast !!!! :/
-                System.out.println(i);
+                if(isClient())
                 if (changes.getRecivedMilitaryTools().get(i).getName().equals(militaryTools.get(j).getName()) && !changes.getRecivedMilitaryTools().get(i).getName().equals(tank.getName())){
                     militaryTools.get(j).setHealth(changes.getRecivedMilitaryTools().get(i).getHealth());
                     militaryTools.get(j).setRotate(changes.getRecivedMilitaryTools().get(i).getRotate());
@@ -175,6 +184,25 @@ public class GameState {
                 }
             }
         }
+
+//        if(isServer() && changes.getRecived()!=null){
+////            System.out.println(militaryTools.size());
+////            for (int i=0;i<militaryTools.size();i++)
+////                if(militaryTools.get(i).getName().equals("client")) {
+////                    militaryTools.get(i).setHealth(changes.getHealth());
+////                    militaryTools.get(i).setRotate(changes.getRotate());
+////                    militaryTools.get(i).setFirstX(changes.getLocx());
+////                    militaryTools.get(i).setFirstY(changes.getLocy());
+//                    tank2.setHealth(changes.getRecived().getHealth());
+//                    tank2.setFirstX(changes.getRecived().getFirstX());
+//                    tank2.setLocY(changes.getRecived().getFirstY());
+//                    tank2.setRotate(changes.getRecived().getRotate());
+////                }
+//        }
+    }
+
+    public TankHuman getTank2() {
+        return tank2;
     }
 
     public void setServer(boolean server) {
@@ -184,7 +212,8 @@ public class GameState {
             tank.setName("server");
             tankHumens = new ArrayList<TankHuman>();
             tankHumens.add(tank);
-            TankHuman tank2 = new TankHuman(1200,500);
+            tank2= new TankHuman(1200,500);
+            tankHumens.add(tank2);
             tank2.setName("client");
             militaryTools.add(tank2);
         }
@@ -273,6 +302,9 @@ public class GameState {
         }
     }
 
+    /**
+     * handle click that be happen in gui
+     */
     private void guiSensorClick() {
         if (GameFrame.start) {
             GameFrame.loneWolfClick = true;
@@ -285,19 +317,117 @@ public class GameState {
         }
         if (GameFrame.loneWolfClick) {
             if (GameFrame.hard) {
+                tank.setHealth(100);
                 GameFrame.inMenu = false;
+                GameFrame.loneWolfClick=false;
+                hardly(3);
             } else if (GameFrame.meduim) {
+                tank.setHealth(250);
                 GameFrame.inMenu = false;
+                GameFrame.loneWolfClick=false;
+                hardly(2);
             } else if (GameFrame.eseay) {
+                tank.setHealth(800);
                 GameFrame.inMenu = false;
+                GameFrame.loneWolfClick=false;
+                hardly(1);
             }
 
         }
         if(GameFrame.resumeGame){
-
+            FileSetting fileSetting = new FileSetting();
+            fileSetting.reading();
+            reading(fileSetting.getBuildings(),fileSetting.getMilitaryTools(),fileSetting.getTankHuman());
+            GameFrame.resumeGame=false;
+            GameFrame.inMenu=false;
         }
     }
 
+    /**
+     * reads from file
+     * @param buildings
+     * @param militaryTools
+     */
+    public void reading(ArrayList<Building>buildings,ArrayList<MilitaryTool>militaryTools,TankHuman tankHuman){
+        this.buildings = new ArrayList<Building>();
+        this.militaryTools = new ArrayList<MilitaryTool>();
+        grasses = new ArrayList<Grass>();
+        walls = new ArrayList<Wall>();
+        prizes = new ArrayList<Prizes>();
+        tanks = new ArrayList<Tank>();
+        grasses = new ArrayList<Grass>();
+//        tankHumens = new ArrayList<TankHuman>();
+        tank.setHealth(tankHuman.getHealth());
+        tank.setFirstX(tankHuman.getFirstX()+tankHuman.getDeltaX());
+        tank.setFirstY(tankHuman.getFirstY()+tankHuman.getDeltaY());
+        tank.setNumberCheapBullet(tankHuman.getNumberCheapBullet());
+        tank.setNumberBullet(tankHuman.getNumberBullet());
+        tank.setStateHeavyGun(tankHuman.isStateHeavyGun());
+            for (int i=0;i<militaryTools.size();i++){
+//                if(militaryTools.get(i).getKind().equals("Soosk")){
+//                    Soosk soosk = new Soosk(militaryTools.get(i).getFirstX(),militaryTools.get(i).getFirstY());
+//                    soosk.setName(soosk.getKind());
+//                    militaryTools.add(soosk);
+//                }
+                if(militaryTools.get(i).getKind().equals("TankAi")){
+                    TankAi temp = (TankAi)militaryTools.get(i);
+                    TankAi tankAi = new TankAi(temp.getFirstX(),temp.getFirstY(),temp.getRangeX(),temp.getRangeY(),temp.getTirRange());
+                    tankAi.setName(tankAi.getKind());
+                    tankAi.setHealth(militaryTools.get(i).getHealth());
+                    this.militaryTools.add(tankAi);
+                    tanks.add(tankAi);
+                }
+                if(militaryTools.get(i).getKind().equals("PoisenosStaticTank")){
+                    PoisenosStaticTank poisenosStaticTank = new PoisenosStaticTank(militaryTools.get(i).getFirstX(),militaryTools.get(i).getFirstY(),militaryTools.get(i).getTirRange());
+                    poisenosStaticTank.setName(poisenosStaticTank.getKind());
+                    poisenosStaticTank.setHealth(militaryTools.get(i).getHealth());
+                    this.militaryTools.add(poisenosStaticTank);
+                    tanks.add(poisenosStaticTank);
+                }
+                if(militaryTools.get(i).getKind().equals("SimpleStaticTank")){
+                    SimpleStaticTank simpleStaticTank = new SimpleStaticTank(militaryTools.get(i).getFirstX(),militaryTools.get(i).getFirstY(),militaryTools.get(i).tirRange);
+                    simpleStaticTank.setName(simpleStaticTank.getKind());
+                    simpleStaticTank.setHealth(militaryTools.get(i).getHealth());
+                    this.militaryTools.add(simpleStaticTank);
+                    tanks.add(simpleStaticTank);
+                }
+            }
+            for (int i=0;i<buildings.size();i++){
+                System.out.println(buildings.get(i).getKind());
+                if(buildings.get(i).getKind().equals("softWall")) {
+                    SoftWall softWall = new SoftWall(buildings.get(i).firstX, buildings.get(i).getFirstY());
+                    softWall.setHealth(buildings.get(i).getHealth());
+                    walls.add(softWall);
+                }
+                    if(buildings.get(i).getKind().equals("hardWall")) {
+                        walls.add(new HardWall(buildings.get(i).firstX, buildings.get(i).getFirstY()));
+                    }
+                        if(buildings.get(i).getKind().equals("teazel")){
+                            walls.add(new Teazel(buildings.get(i).firstX,buildings.get(i).getFirstY()));
+                }
+                if(buildings.get(i).getKind().equals("grass")){
+                    grasses.add(new Grass(buildings.get(i).firstX,buildings.get(i).getFirstY()));
+                }
+                if(buildings.get(i).getKind().equals("repair")){
+                    prizes.add(new Repair(buildings.get(i).firstX,buildings.get(i).getFirstY()));
+                }
+                if(buildings.get(i).getKind().equals("speed")){
+                    prizes.add(new Speed(buildings.get(i).firstX,buildings.get(i).getFirstY()));
+                }
+                if(buildings.get(i).getKind().equals("machingun")){
+                    prizes.add(new Machingun(buildings.get(i).firstX,buildings.get(i).getFirstY()));
+                }
+                if(buildings.get(i).getKind().equals("star")){
+                    prizes.add(new Star(buildings.get(i).firstX,buildings.get(i).getFirstY()));
+                }
+                if(buildings.get(i).getKind().equals("canonshells")){
+                    prizes.add(new Canonshells(buildings.get(i).firstX,buildings.get(i).getFirstY()));
+                }
+            }
+            for (int i=0;i<walls.size();i++){
+                buildings.add(walls.get(i));
+            }
+    }
     public Changes getChanges() {
         return changes;
     }
@@ -307,11 +437,11 @@ public class GameState {
      */
     private void mapCreator() {
             tanks.add(new TankAi(300, 100, 100, 0, 1000000));
-            tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
+            tanks.get(tanks.size() - 1).setName("avai");
         tanks.add(new TankAi(300, 600, 200, 20, 1000000));
-        tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
+        tanks.get(tanks.size() - 1).setName("dovomi");
             tanks.add(new TankAi(500,2100,200,200,1000000));
-           tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
+           tanks.get(tanks.size() - 1).setName("sevomi");
            tanks.add(new SimpleStaticTank(100, 2800, 1000000));
             tanks.get(tanks.size() - 1).setName(tanks.get(tanks.size() - 1).kind);
             tanks.add(new PoisenosStaticTank(100, 2200, 1000000));
@@ -455,6 +585,9 @@ public class GameState {
         return grasses;
     }
 
+    /**
+     *update all information
+     */
     public void update() {
         changed = false;
         //
@@ -475,16 +608,23 @@ public class GameState {
                 return;
             }
             if(militaryTools.size()==1){
-                if(militaryTools.get(0).getName().equals("server") || militaryTools.get(0).getName().equals("client"))
-                    win=true;
-                return;
+                if(militaryTools.get(0).getName().equals("server") || militaryTools.get(0).getName().equals("client")) {
+                    win = true;
+                    return;
+                }
             }
             if(server || client){
                 updateOnlineChanges();
 //                changes.removeRecivedBuilding();
                 changes.removeRecivedTirs();
                 changes.removeRecivedMilitarytools();
+                changes.setRecived(null);
 //            changes.removeAll();
+            }
+            if(tank.getSave()){
+                FileSetting fileSetting = new FileSetting();
+                fileSetting.writing(this);
+                tank.setSave(false);
             }
             mapMoving();
             tankHit();
@@ -530,6 +670,10 @@ public class GameState {
         return tirs;
     }
 
+    /**
+     * map moving
+     */
+    //حرکت نسبی برنامه را تنظیم می کند
     public void mapMoving(){
         for (int i=0;i<tirs.size();i++){
             tirs.get(i).setLocX(tirs.get(i).getFirstX()-tirs.get(i).getTankDeltaX());
@@ -572,6 +716,9 @@ public class GameState {
         return changedBuildings;
     }
 
+    /**
+     * build new bullet
+     */
     public void BuildingNewBullet(){
         if(tank.isMouseRealised()){
             double rotationRequired = Math.atan((double) (tank.getMouseY() - tank.locY-100+25)/
@@ -638,6 +785,9 @@ public class GameState {
         }
     }
 
+    /**
+     * manage bullet hitting
+     */
     public void bulletHit(){
 
         ArrayList<MilitaryTool>militaryTools = new ArrayList<MilitaryTool>();
@@ -775,6 +925,12 @@ public class GameState {
             if(militaryTool.isDead())
                 iterator2.remove();
         }
+        Iterator iterator3 = buildings.iterator();
+        while (iterator3.hasNext()){
+            Building building = (Building) iterator3.next();
+            if(building.isDie())
+                iterator3.remove();
+        }
     }
 
     public TankHuman getTank() {
@@ -795,6 +951,9 @@ public class GameState {
         }
     }
 
+    /**
+     * handle changing photoes in gui
+     */
     public void guiSensourArea() {
         int mouseNowX = MouseInfo.getPointerInfo().getLocation().x;
         int mouseNowY = MouseInfo.getPointerInfo().getLocation().y;
@@ -857,6 +1016,52 @@ public class GameState {
 
     public static void setGameOver(boolean gameOver) {
         GameState.gameOver = gameOver;
+    }
+
+    /**
+     * this method manage dificulty
+     * @param degree hardly stage
+     */
+    public void hardly(int degree){
+        if(degree==1){
+            for(int i =0;i<militaryTools.size();i++){
+                if(militaryTools.get(i) instanceof MovableTank){
+                    militaryTools.get(i).setHealth(50);
+                }
+                else if(militaryTools.get(i) instanceof StaticTank){
+                    militaryTools.get(i).setHealth(100);
+                }
+                else if(militaryTools.get(i) instanceof Soosk){
+                    militaryTools.get(i).setHealth(120);
+                }
+            }
+        }
+        else if(degree==2){
+            for(int i =0;i<militaryTools.size();i++){
+                if(militaryTools.get(i) instanceof MovableTank){
+                    militaryTools.get(i).setHealth(80);
+                }
+                else if(militaryTools.get(i) instanceof StaticTank){
+                    militaryTools.get(i).setHealth(120);
+                }
+                else if(militaryTools.get(i) instanceof Soosk){
+                    militaryTools.get(i).setHealth(160);
+                }
+            }
+        }else  if(degree==3){
+            for(int i =0;i<militaryTools.size();i++){
+                if(militaryTools.get(i) instanceof MovableTank){
+                    militaryTools.get(i).setHealth(150);
+                }
+                else if(militaryTools.get(i) instanceof StaticTank){
+                    militaryTools.get(i).setHealth(250);
+                }
+                else if(militaryTools.get(i) instanceof Soosk){
+                    militaryTools.get(i).setHealth(300);
+                }
+            }
+        }
+
     }
 }
 

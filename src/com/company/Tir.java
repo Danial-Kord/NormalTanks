@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * tir mean bullet :)
+ */
 public class Tir implements Serializable{
     private int locX, locY;
     private double delytaY, deltaX;

@@ -6,9 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * kind of wall never destroyed
+ */
 public class HardWall extends Wall implements Serializable {
     public HardWall(int locX, int locY) {
         super(locX, locY);
+        kind = "hardWall";
         try {
             moshak = ImageIO.read(new File("Src//hardWall.png"));
             path =  "hardWall";

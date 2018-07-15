@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * this class stores every changes in map from server or client
+ */
 public class Changes implements Serializable{
     private ArrayList<Building>buildings;
     private ArrayList<Tir>tirs;
     private ArrayList<MilitaryTool>militaryTools;
+    private TankHuman tankHuman;
+    private transient TankHuman recived;
     private transient ArrayList<Tir>recivedTirs;
     private transient ArrayList<Building>recivedBuildings;
     private transient ArrayList<MilitaryTool>recivedMilitaryTools;
@@ -17,16 +22,18 @@ public class Changes implements Serializable{
         recivedBuildings = new ArrayList<Building>();
         buildings=new ArrayList<Building>();
         tirs=new ArrayList<Tir>();
+
         recivedTirs = new ArrayList<Tir>();
     }
         public void update(ArrayList<Building>newBuildings,ArrayList<Tir>newTirs,TankHuman tankHuman,GameState state){
-        for (int i=0;i<newBuildings.size();i++){
-//            Building building = new Building(newBuildings.get(i).locX,newBuildings.get(i).locY);
-//            building.setHealth(newBuildings.get(i).getHealth());
-//            building.setDie(newBuildings.get(i).isDie());
-            buildings.add((Building) newBuildings.get(i));
-            System.out.println("added");
-        }
+//        for (int i=0;i<newBuildings.size();i++){
+////            Building building = new Building(newBuildings.get(i).locX,newBuildings.get(i).locY);
+////            building.setHealth(newBuildings.get(i).getHealth());
+////            building.setDie(newBuildings.get(i).isDie());
+//            buildings.add((Building) newBuildings.get(i));
+//            System.out.println("added");
+//        }
+        tirs=new ArrayList<Tir>();
         for (int i=0;i<newTirs.size();i++){
             //TODO
             Tir tir = new Tir(newTirs.get(i).getFirstX()+tankHuman.getDeltaX(),newTirs.get(i).getFirstY()+tankHuman.getDeltaY(),newTirs.get(i).getDelytaY(),newTirs.get(i).getDeltaX(),
@@ -35,25 +42,37 @@ public class Changes implements Serializable{
             tirs.add(tir);
         }
         Iterator iterator = state.getMilitaryTools().iterator();
-        militaryTools = new ArrayList<MilitaryTool>();
-        while (iterator.hasNext()){
-            MilitaryTool temp = (MilitaryTool)iterator.next();
+        if(state.isServer()) {
+            militaryTools = new ArrayList<MilitaryTool>();
+            while (iterator.hasNext()) {
+                MilitaryTool temp = (MilitaryTool) iterator.next();
 //            MilitaryTool militaryTool = new MilitaryTool(temp.getFirstX(),temp.getFirstY());
 //            militaryTool.setRotate(temp.getRotate());
 //            militaryTool.setHealth(temp.getHealth());
 //            militaryTool.setName(temp.getName());
-            militaryTools.add((MilitaryTool) (temp));
+                militaryTools.add((MilitaryTool) (temp));
 //            MilitaryTool militaryTool = new MilitaryTool(state.getMilitaryTools().get(i).getFirstX(),state.getMilitaryTools().get(i).getFirstY());
 //            militaryTool.setRotate(state.getMilitaryTools().get(i).getRotate());
 //            militaryTool.setHealth(state.getMilitaryTools().get(i).getHealth());
 //            militaryTool.setName(state.getMilitaryTools().get(i).getName());
 //            militaryTools.add(militaryTool);
-        }
-            MilitaryTool militaryTool = new MilitaryTool(tankHuman.getLocX()+tankHuman.getDeltaX(),tankHuman.getLocY()+tankHuman.getDeltaY());
+            }
+            MilitaryTool militaryTool = new MilitaryTool(tankHuman.getLocX() + tankHuman.getDeltaX(), tankHuman.getLocY() + tankHuman.getDeltaY());
             militaryTool.setRotate(tankHuman.getRotate());
             militaryTool.setHealth(tankHuman.getHealth());
             militaryTool.setName(tankHuman.getName());
             militaryTools.add(militaryTool);
+        }
+//        if(state.isClient()) {
+            this.tankHuman= new TankHuman(tankHuman.getLocX() + tankHuman.getDeltaX(), tankHuman.getLocY() + tankHuman.getDeltaY());
+            this.tankHuman.setRotate(state.getTank().getRotate());
+            this.tankHuman.setHealth(state.getTank().getHealth());
+            this.tankHuman.setName(state.getTank().getName());
+//            locx=state.getTank().getLocX() + tankHuman.getDeltaX();
+//            locy = state.getTank().getLocY() + tankHuman.getDeltaY();
+//            rotate=state.getTank().getRotate();
+//            health=state.getTank().getHealth();
+//        }
         }
         public  void removeAll(){
                 if(buildings.size() != 0){
@@ -66,6 +85,28 @@ public class Changes implements Serializable{
         public void removeRecivedMilitarytools(){
         recivedMilitaryTools = new ArrayList<MilitaryTool>();
         }
+
+    public void setRecived(TankHuman recived) {
+        this.recived = recived;
+    }
+
+    public TankHuman getRecived() {
+        return recived;
+    }
+
+    public TankHuman getTankHuman() {
+        return tankHuman;
+    }
+
+
+
+
+
+
+
+    public void setTankHuman(TankHuman tankHuman) {
+        this.tankHuman = tankHuman;
+    }
 
     public void setTirs(ArrayList<Tir> tirs) {
         this.tirs = tirs;

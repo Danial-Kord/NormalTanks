@@ -1,18 +1,23 @@
 package com.company;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * increase your move speed
+ */
 public class Speed extends Prizes {
     public Speed(int locX, int locY) {
         super(locX, locY);
         try {
-            super.image= ImageIO.read(new File("src\\prizes\\tank repair.png"));
+            super.image= ImageIO.read(new File("src\\prizes\\speed.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        path = "repair";
+        kind = "speed";
+        rectangle = new Rectangle(locX, locY, image.getWidth(), image.getHeight());
     }
     @Override
     public void task(Tank tank) {
@@ -20,6 +25,7 @@ public class Speed extends Prizes {
             if (getVisible()) {
                 tank.setSpeed(tank.getSpeed() + 2);
                 setVisible(false);
+                setDie(true);
                 SoundsHandeler.playSoundInGame(new File("music\\repair.wav"));
             }
         } else {

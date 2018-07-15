@@ -9,8 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * its you
+ */
 public class TankHuman extends MovableTank implements Serializable {
-    private Boolean H, E, L, P, G, U, N;
+    private Boolean H, E, L, P, G, U, N,save;
     private boolean mousePress,mouseRealised;
     public boolean gameOver;
     private transient KeyHandler keyHandler;
@@ -22,12 +25,14 @@ public class TankHuman extends MovableTank implements Serializable {
     /////////////////////
     public TankHuman(int locX,int locY){
         super(locX,locY);
+        save=false;
         pause=false;
         gameOver = false;
         mousePress = false;
         keyHandler = new KeyHandler();
         mouseHandler = new MouseHandler();
         stop = false;
+        rotate=0;
         tirSpeed = 20;
         kind  = "TankHuman";
         speed = 4;
@@ -36,6 +41,10 @@ public class TankHuman extends MovableTank implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Boolean getSave() {
+        return save;
     }
 
     public void setTirSpeed(int tirSpeed) {
@@ -212,6 +221,13 @@ public class TankHuman extends MovableTank implements Serializable {
             dead=false;
         }
     }
+
+
+
+    public void setSave(Boolean save) {
+        this.save = save;
+    }
+
     public boolean isMousePress() {
         return mousePress;
     }
@@ -233,6 +249,7 @@ public class TankHuman extends MovableTank implements Serializable {
                     break;
                 case KeyEvent.VK_S:
                     System.out.println("دکمه s رو زدی");
+                    save=true;
                     break;
                 case KeyEvent.VK_ESCAPE:{
                     GameFrame.pause=!GameFrame.pause;

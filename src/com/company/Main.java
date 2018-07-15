@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 /**
  * Program start.
  *
- * @author Seyed Mohammad Ghaffarian
+ * @author amir hosein kashani _ danial kordmodanlou
  */
 public class Main {
 

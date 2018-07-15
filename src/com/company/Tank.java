@@ -13,12 +13,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * father of all tanks
+ */
 public class Tank extends MilitaryTool implements Serializable{
     private int numberBullet=20;
     private int numberCheapBullet=5;
     public boolean stateHeavyGun=true;
 
-    public int locXLooleh,locYLooleh;
+    private int locXLooleh,locYLooleh;
     protected int mouseX, mouseY;
     protected transient BufferedImage looleh;
     protected boolean up,down,left,right;
@@ -63,6 +66,54 @@ public class Tank extends MilitaryTool implements Serializable{
 
     public void update(ArrayList<Wall> walls, ArrayList<Tank>tanks){
         count++;
+    }
+
+    public int getNumberBullet() {
+        return numberBullet;
+    }
+
+    public void setNumberBullet(int numberBullet) {
+        this.numberBullet = numberBullet;
+    }
+
+    public void setNumberCheapBullet(int numberCheapBullet) {
+        this.numberCheapBullet = numberCheapBullet;
+    }
+
+    public boolean isStateHeavyGun() {
+        return stateHeavyGun;
+    }
+
+    public void setStateHeavyGun(boolean stateHeavyGun) {
+        this.stateHeavyGun = stateHeavyGun;
+    }
+
+    public void setMouseX(int mouseX) {
+        this.mouseX = mouseX;
+    }
+
+    public void setMouseY(int mouseY) {
+        this.mouseY = mouseY;
+    }
+
+    public void setLooleh(BufferedImage looleh) {
+        this.looleh = looleh;
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public boolean isRight() {
+        return right;
     }
 
     public boolean isDead() {

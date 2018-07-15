@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * this code manage server for connecting to client
+ */
 public class Server implements Runnable{
     private int count = 0;
     private GameState state;
@@ -28,6 +31,7 @@ public class Server implements Runnable{
                     GameFrame.setConected(true);
                     pool.execute(new ClientHandler(client,state));
                 }
+                GameFrame.setConected(false);
                 pool.shutdown();
                 System.out.print("done.\nClosing serverImage ... ");
             } catch (IOException ex) {
@@ -37,7 +41,9 @@ public class Server implements Runnable{
         }
     }
 
-
+/**
+ * manage streams
+ */
 class ClientHandler implements Runnable {
 
     private Socket client;
@@ -59,7 +65,7 @@ class ClientHandler implements Runnable {
                     while (!GameState.isGameOver()) {
                         sent =false;
                         try {
-                            Thread.sleep(25);
+                            Thread.sleep(5);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -84,15 +90,17 @@ class ClientHandler implements Runnable {
 
 
 //                        if(sent) {
-//                            Changes changes = (Changes) in.readObject();
+                            Changes changes = (Changes) in.readObject();
 ////                            System.out.println("server recived");
 //////                            System.out.println(changes.getBuildings().get(changes.getBuildings().size()-1).locY);
 //////                                System.out.println("client recived");
 //////                                    System.out.println(buildings.get(0).locX);
-////                            if (changes.getBuildings().size() != 0)
-////                                state.getChanges().setRecivedBuildings(changes.getBuildings());
-//                            if (changes.getTirs().size() != 0)
-//                                state.getChanges().setRecivedTirs(changes.getTirs());
+//                            if (changes.getBuildings().size() != 0)
+//                                state.getChanges().setRecivedBuildings(changes.getBuildings());
+                            if (changes.getTirs().size() != 0)
+                                state.getChanges().setRecivedTirs(changes.getTirs());
+                            if(changes.getTankHuman() != null)
+                            state.getChanges().setRecived(changes.getTankHuman());
 //                            if (changes.getMilitaryTools().size() != 0)
 //                                state.getChanges().setRecivedMilitaryTools(changes.getMilitaryTools());
 

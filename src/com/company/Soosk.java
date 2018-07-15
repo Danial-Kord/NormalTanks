@@ -5,9 +5,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Soosk extends MilitaryTool{
+/**
+ * kind of enemy that move so fast
+ * همون انتحاری خودمون
+ */
+public class Soosk extends MilitaryTool implements Serializable{
     private transient BufferedImage image;
     private boolean active;
     public Soosk(int locX, int locY) {
