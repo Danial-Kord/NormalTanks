@@ -19,12 +19,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            <state relative-caret-position="96">
+              <caret line="102" column="44" lean-forward="false" selection-start-line="102" selection-start-column="34" selection-end-line="102" selection-end-column="44" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Changes.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Changes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-332">
+              <caret line="40" column="38" lean-forward="false" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="38" />
+              <folding>
+                <element signature="e#4333#4334#0" expanded="true" />
+                <element signature="e#4405#4406#0" expanded="true" />
+                <element signature="e#4454#4455#0" expanded="true" />
+                <element signature="e#4492#4493#0" expanded="true" />
+                <element signature="e#4529#4530#0" expanded="true" />
+                <element signature="e#4559#4560#0" expanded="true" />
+                <element signature="e#4598#4599#0" expanded="true" />
+                <element signature="e#4630#4631#0" expanded="true" />
+                <element signature="e#4689#4690#0" expanded="true" />
+                <element signature="e#4731#4732#0" expanded="true" />
+                <element signature="e#4779#4780#0" expanded="true" />
+                <element signature="e#4811#4812#0" expanded="true" />
+                <element signature="e#4868#4869#0" expanded="true" />
+                <element signature="e#4904#4905#0" expanded="true" />
+                <element signature="e#4979#4980#0" expanded="true" />
+                <element signature="e#5029#5030#0" expanded="true" />
+                <element signature="e#5093#5094#0" expanded="true" />
+                <element signature="e#5136#5137#0" expanded="true" />
+                <element signature="e#5327#5328#0" expanded="true" />
+                <element signature="e#5377#5378#0" expanded="true" />
+                <element signature="e#5438#5439#0" expanded="true" />
+                <element signature="e#5484#5485#0" expanded="true" />
+                <element signature="e#5523#5524#0" expanded="true" />
+                <element signature="e#5550#5551#0" expanded="true" />
+                <element signature="e#5596#5597#0" expanded="true" />
+                <element signature="e#5630#5631#0" expanded="true" />
+                <element signature="e#5693#5694#0" expanded="true" />
+                <element signature="e#5735#5736#0" expanded="true" />
+                <element signature="e#6102#6103#0" expanded="true" />
+                <element signature="e#6166#6167#0" expanded="true" />
+                <element signature="e#6242#6243#0" expanded="true" />
+                <element signature="e#6298#6299#0" expanded="true" />
+                <element signature="e#6354#6355#0" expanded="true" />
+                <element signature="e#6393#6394#0" expanded="true" />
+                <element signature="e#6442#6443#0" expanded="true" />
+                <element signature="e#6474#6475#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -32,18 +79,8 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
+            <state relative-caret-position="-420">
               <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SoftWall.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/SoftWall.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -65,6 +102,46 @@
             <state relative-caret-position="84">
               <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/company/GameState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="620" column="29" lean-forward="true" selection-start-line="620" selection-start-column="29" selection-end-line="620" selection-end-column="29" />
+              <folding>
+                <element signature="e#17796#17797#0" expanded="true" />
+                <element signature="e#17826#17827#0" expanded="true" />
+                <element signature="e#25360#25361#0" expanded="true" />
+                <element signature="e#25389#25390#0" expanded="true" />
+                <element signature="e#25422#25423#0" expanded="true" />
+                <element signature="e#25451#25452#0" expanded="true" />
+                <element signature="e#25508#25509#0" expanded="true" />
+                <element signature="e#25544#25545#0" expanded="true" />
+                <element signature="e#25585#25586#0" expanded="true" />
+                <element signature="e#25613#25614#0" expanded="true" />
+                <element signature="e#25710#25711#0" expanded="true" />
+                <element signature="e#25737#25738#0" expanded="true" />
+                <element signature="e#27914#27915#0" expanded="true" />
+                <element signature="e#27946#27947#0" expanded="true" />
+                <element signature="e#28009#28010#0" expanded="true" />
+                <element signature="e#28048#28049#0" expanded="true" />
+                <element signature="method#bulletHit#0;class#GameState#0" expanded="false" />
+                <element signature="method#removingTrash#0;class#GameState#0" expanded="false" />
+                <element signature="e#40502#40503#0" expanded="true" />
+                <element signature="e#40529#40530#0" expanded="true" />
+                <element signature="e#40571#40572#0" expanded="true" />
+                <element signature="e#40599#40600#0" expanded="true" />
+                <element signature="method#distance#0;class#GameState#0" expanded="false" />
+                <element signature="method#guiSensourArea#0;class#GameState#0" expanded="false" />
+                <element signature="e#42722#42723#0" expanded="true" />
+                <element signature="e#42753#42754#0" expanded="true" />
+                <element signature="e#42809#42810#0" expanded="true" />
+                <element signature="e#42854#42855#0" expanded="true" />
+                <element signature="method#hardly#0;class#GameState#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,16 +186,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileSetting.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/FileSetting.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -130,8 +197,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sensour</find>
-      <find>click</find>
       <find>guisens</find>
       <find>updat</find>
       <find>inm</find>
@@ -160,6 +225,8 @@
       <find>huma</find>
       <find>loo</find>
       <find>update</find>
+      <find>recivedTirs</find>
+      <find>changes</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -206,14 +273,14 @@
         <option value="$PROJECT_DIR$/src/com/company/TankHuman.java" />
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
         <option value="$PROJECT_DIR$/src/com/company/MovableTank.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Changes.java" />
         <option value="$PROJECT_DIR$/src/com/company/GameFrame.java" />
         <option value="$PROJECT_DIR$/src/com/company/Server.java" />
         <option value="$PROJECT_DIR$/src/com/company/Client.java" />
         <option value="$PROJECT_DIR$/src/com/company/HardWall.java" />
-        <option value="$PROJECT_DIR$/src/com/company/GameState.java" />
         <option value="$PROJECT_DIR$/src/com/company/Tank.java" />
         <option value="$PROJECT_DIR$/src/com/company/MilitaryTool.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Changes.java" />
+        <option value="$PROJECT_DIR$/src/com/company/GameState.java" />
       </list>
     </option>
   </component>
@@ -445,7 +512,7 @@
       <workItem from="1531560650793" duration="24540000" />
       <workItem from="1531588627598" duration="15597000" />
       <workItem from="1531604750410" duration="629000" />
-      <workItem from="1531634551955" duration="2508000" />
+      <workItem from="1531634551955" duration="2954000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1530621519503</created>
@@ -538,11 +605,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531636914881</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="rize kari ha taghriban tamoomeh">
+      <created>1531637063710</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1531637063710</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="248834000" />
+    <option name="totallyTimeSpent" value="249280000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -726,42 +800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="41" column="10" lean-forward="false" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="10" />
-          <folding>
-            <element signature="e#25360#25361#0" expanded="true" />
-            <element signature="e#25389#25390#0" expanded="true" />
-            <element signature="e#25422#25423#0" expanded="true" />
-            <element signature="e#25451#25452#0" expanded="true" />
-            <element signature="e#25508#25509#0" expanded="true" />
-            <element signature="e#25544#25545#0" expanded="true" />
-            <element signature="e#25585#25586#0" expanded="true" />
-            <element signature="e#25613#25614#0" expanded="true" />
-            <element signature="e#25710#25711#0" expanded="true" />
-            <element signature="e#25737#25738#0" expanded="true" />
-            <element signature="e#27914#27915#0" expanded="true" />
-            <element signature="e#27946#27947#0" expanded="true" />
-            <element signature="e#28009#28010#0" expanded="true" />
-            <element signature="e#28048#28049#0" expanded="true" />
-            <element signature="method#bulletHit#0;class#GameState#0" expanded="false" />
-            <element signature="method#removingTrash#0;class#GameState#0" expanded="false" />
-            <element signature="e#40502#40503#0" expanded="true" />
-            <element signature="e#40529#40530#0" expanded="true" />
-            <element signature="e#40571#40572#0" expanded="true" />
-            <element signature="e#40599#40600#0" expanded="true" />
-            <element signature="method#distance#0;class#GameState#0" expanded="false" />
-            <element signature="method#guiSensourArea#0;class#GameState#0" expanded="false" />
-            <element signature="e#42722#42723#0" expanded="true" />
-            <element signature="e#42753#42754#0" expanded="true" />
-            <element signature="e#42809#42810#0" expanded="true" />
-            <element signature="e#42854#42855#0" expanded="true" />
-            <element signature="method#hardly#0;class#GameState#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Repair.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
@@ -854,51 +892,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Changes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="67" column="47" lean-forward="false" selection-start-line="67" selection-start-column="47" selection-end-line="69" selection-end-column="62" />
-          <folding>
-            <element signature="e#4333#4334#0" expanded="true" />
-            <element signature="e#4405#4406#0" expanded="true" />
-            <element signature="e#4454#4455#0" expanded="true" />
-            <element signature="e#4492#4493#0" expanded="true" />
-            <element signature="e#4529#4530#0" expanded="true" />
-            <element signature="e#4559#4560#0" expanded="true" />
-            <element signature="e#4598#4599#0" expanded="true" />
-            <element signature="e#4630#4631#0" expanded="true" />
-            <element signature="e#4689#4690#0" expanded="true" />
-            <element signature="e#4731#4732#0" expanded="true" />
-            <element signature="e#4779#4780#0" expanded="true" />
-            <element signature="e#4811#4812#0" expanded="true" />
-            <element signature="e#4868#4869#0" expanded="true" />
-            <element signature="e#4904#4905#0" expanded="true" />
-            <element signature="e#4979#4980#0" expanded="true" />
-            <element signature="e#5029#5030#0" expanded="true" />
-            <element signature="e#5093#5094#0" expanded="true" />
-            <element signature="e#5136#5137#0" expanded="true" />
-            <element signature="e#5327#5328#0" expanded="true" />
-            <element signature="e#5377#5378#0" expanded="true" />
-            <element signature="e#5438#5439#0" expanded="true" />
-            <element signature="e#5484#5485#0" expanded="true" />
-            <element signature="e#5523#5524#0" expanded="true" />
-            <element signature="e#5550#5551#0" expanded="true" />
-            <element signature="e#5596#5597#0" expanded="true" />
-            <element signature="e#5630#5631#0" expanded="true" />
-            <element signature="e#5693#5694#0" expanded="true" />
-            <element signature="e#5735#5736#0" expanded="true" />
-            <element signature="e#6102#6103#0" expanded="true" />
-            <element signature="e#6166#6167#0" expanded="true" />
-            <element signature="e#6242#6243#0" expanded="true" />
-            <element signature="e#6298#6299#0" expanded="true" />
-            <element signature="e#6354#6355#0" expanded="true" />
-            <element signature="e#6393#6394#0" expanded="true" />
-            <element signature="e#6442#6443#0" expanded="true" />
-            <element signature="e#6474#6475#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/CheapBullet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -911,14 +904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -979,11 +964,102 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-420">
+          <caret line="41" column="46" lean-forward="false" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="96">
+          <caret line="102" column="44" lean-forward="false" selection-start-line="102" selection-start-column="34" selection-end-line="102" selection-end-column="44" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="620" column="29" lean-forward="true" selection-start-line="620" selection-start-column="29" selection-end-line="620" selection-end-column="29" />
+          <folding>
+            <element signature="e#17796#17797#0" expanded="true" />
+            <element signature="e#17826#17827#0" expanded="true" />
+            <element signature="e#25360#25361#0" expanded="true" />
+            <element signature="e#25389#25390#0" expanded="true" />
+            <element signature="e#25422#25423#0" expanded="true" />
+            <element signature="e#25451#25452#0" expanded="true" />
+            <element signature="e#25508#25509#0" expanded="true" />
+            <element signature="e#25544#25545#0" expanded="true" />
+            <element signature="e#25585#25586#0" expanded="true" />
+            <element signature="e#25613#25614#0" expanded="true" />
+            <element signature="e#25710#25711#0" expanded="true" />
+            <element signature="e#25737#25738#0" expanded="true" />
+            <element signature="e#27914#27915#0" expanded="true" />
+            <element signature="e#27946#27947#0" expanded="true" />
+            <element signature="e#28009#28010#0" expanded="true" />
+            <element signature="e#28048#28049#0" expanded="true" />
+            <element signature="method#bulletHit#0;class#GameState#0" expanded="false" />
+            <element signature="method#removingTrash#0;class#GameState#0" expanded="false" />
+            <element signature="e#40502#40503#0" expanded="true" />
+            <element signature="e#40529#40530#0" expanded="true" />
+            <element signature="e#40571#40572#0" expanded="true" />
+            <element signature="e#40599#40600#0" expanded="true" />
+            <element signature="method#distance#0;class#GameState#0" expanded="false" />
+            <element signature="method#guiSensourArea#0;class#GameState#0" expanded="false" />
+            <element signature="e#42722#42723#0" expanded="true" />
+            <element signature="e#42753#42754#0" expanded="true" />
+            <element signature="e#42809#42810#0" expanded="true" />
+            <element signature="e#42854#42855#0" expanded="true" />
+            <element signature="method#hardly#0;class#GameState#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Changes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-332">
+          <caret line="40" column="38" lean-forward="false" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="38" />
+          <folding>
+            <element signature="e#4333#4334#0" expanded="true" />
+            <element signature="e#4405#4406#0" expanded="true" />
+            <element signature="e#4454#4455#0" expanded="true" />
+            <element signature="e#4492#4493#0" expanded="true" />
+            <element signature="e#4529#4530#0" expanded="true" />
+            <element signature="e#4559#4560#0" expanded="true" />
+            <element signature="e#4598#4599#0" expanded="true" />
+            <element signature="e#4630#4631#0" expanded="true" />
+            <element signature="e#4689#4690#0" expanded="true" />
+            <element signature="e#4731#4732#0" expanded="true" />
+            <element signature="e#4779#4780#0" expanded="true" />
+            <element signature="e#4811#4812#0" expanded="true" />
+            <element signature="e#4868#4869#0" expanded="true" />
+            <element signature="e#4904#4905#0" expanded="true" />
+            <element signature="e#4979#4980#0" expanded="true" />
+            <element signature="e#5029#5030#0" expanded="true" />
+            <element signature="e#5093#5094#0" expanded="true" />
+            <element signature="e#5136#5137#0" expanded="true" />
+            <element signature="e#5327#5328#0" expanded="true" />
+            <element signature="e#5377#5378#0" expanded="true" />
+            <element signature="e#5438#5439#0" expanded="true" />
+            <element signature="e#5484#5485#0" expanded="true" />
+            <element signature="e#5523#5524#0" expanded="true" />
+            <element signature="e#5550#5551#0" expanded="true" />
+            <element signature="e#5596#5597#0" expanded="true" />
+            <element signature="e#5630#5631#0" expanded="true" />
+            <element signature="e#5693#5694#0" expanded="true" />
+            <element signature="e#5735#5736#0" expanded="true" />
+            <element signature="e#6102#6103#0" expanded="true" />
+            <element signature="e#6166#6167#0" expanded="true" />
+            <element signature="e#6242#6243#0" expanded="true" />
+            <element signature="e#6298#6299#0" expanded="true" />
+            <element signature="e#6354#6355#0" expanded="true" />
+            <element signature="e#6393#6394#0" expanded="true" />
+            <element signature="e#6442#6443#0" expanded="true" />
+            <element signature="e#6474#6475#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
